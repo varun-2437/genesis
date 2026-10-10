@@ -126,6 +126,7 @@ export function PlacementProfilePage() {
           { id: 'skills', label: 'Skills & Experience', icon: Code },
           { id: 'projects', label: 'Projects & Links', icon: FolderGit2 },
           { id: 'preferences', label: 'Placement Preferences', icon: Briefcase },
+          { id: 'history', label: 'Placement & Change History', icon: Clock },
         ]}
         activeTab={activeTab}
         onChange={setActiveTab}
@@ -260,6 +261,36 @@ export function PlacementProfilePage() {
                 <label htmlFor="consent" className="text-xs text-slate-700 leading-relaxed cursor-pointer">
                   <strong>Formal Placement Cell Undertaking:</strong> I hereby declare that the academic scores, backlogs, and resumes submitted are genuine. I agree to abide by the institution's Campus Placement Policy and Offer Acceptance Regulations.
                 </label>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Tab 6: Placement & Change History (2.16, 2.17) */}
+        {activeTab === 'history' && (
+          <div className="space-y-6">
+            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Audit Log & Modifications</h3>
+            <div className="space-y-3">
+              <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-start justify-between">
+                <div>
+                  <p className="text-xs font-bold text-slate-900">ERP Academic Scores Auto-Reconciled</p>
+                  <p className="text-[11px] text-slate-500 mt-0.5">Automated COE Sync · CGPA updated to 8.82</p>
+                </div>
+                <span className="text-[10px] text-slate-400 font-medium">Oct 08, 2026 14:20</span>
+              </div>
+              <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-start justify-between">
+                <div>
+                  <p className="text-xs font-bold text-slate-900">Technical Resume (v2_Cloud) Approved</p>
+                  <p className="text-[11px] text-slate-500 mt-0.5">Approved by TPO Staff Prof. Sharma</p>
+                </div>
+                <span className="text-[10px] text-slate-400 font-medium">Oct 05, 2026 11:15</span>
+              </div>
+              <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-start justify-between">
+                <div>
+                  <p className="text-xs font-bold text-slate-900">Placement Undertaking Signed</p>
+                  <p className="text-[11px] text-slate-500 mt-0.5">Digitally executed by student (IP: 103.21.24.12)</p>
+                </div>
+                <span className="text-[10px] text-slate-400 font-medium">Sep 20, 2026 09:30</span>
               </div>
             </div>
           </div>
