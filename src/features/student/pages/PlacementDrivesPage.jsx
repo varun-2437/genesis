@@ -54,11 +54,17 @@ export function PlacementDrivesPage() {
   return (
     <div className="space-y-6 max-w-6xl mx-auto">
       {/* Header */}
-      <div>
-        <h2 className="text-2xl font-bold text-slate-900">Campus Placement Drives</h2>
-        <p className="text-xs text-slate-500 mt-1">
-          Schedule, pre-placement talks (PPT), logistics, and attendance tracking for official campus recruitment drives.
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 className="text-2xl font-bold text-slate-900">Campus Placement Drives</h2>
+          <p className="text-xs text-slate-500 mt-1">
+            Schedule, pre-placement talks (PPT), logistics, and attendance tracking for official campus recruitment drives.
+          </p>
+        </div>
+        <div className="px-4 py-2 bg-indigo-50 border border-indigo-200 rounded-xl text-xs font-semibold text-indigo-900 flex items-center gap-2">
+          <span>Active Drive Application Limit (6.9):</span>
+          <span className="px-2 py-0.5 bg-indigo-600 text-white rounded-md text-[11px]">2 / 5 Used</span>
+        </div>
       </div>
 
       {/* Policy Reminder */}
