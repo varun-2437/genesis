@@ -1,10 +1,22 @@
 import React from 'react'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { PortalLayout } from '@/layouts/PortalLayout'
+import { AuthLayout } from '@/layouts/AuthLayout'
+import { RoleGuard } from '@/components/shared/RoleGuard'
+
+// Shared Pages (X1 - X6)
+import { LoginPage } from '@/features/shared/pages/LoginPage'
+import { ForgotPasswordPage } from '@/features/shared/pages/ForgotPasswordPage'
+import { MfaVerificationPage } from '@/features/shared/pages/MfaVerificationPage'
+import { NotificationCentrePage } from '@/features/shared/pages/NotificationCentrePage'
+import { MyAccountPrivacyPage } from '@/features/shared/pages/MyAccountPrivacyPage'
+import { NotFoundPage, UnauthorizedPage, ServerErrorPage } from '@/features/shared/pages/ErrorPages'
+
+// Feature Dashboards
 import { StudentDashboard } from '@/features/student/pages/StudentDashboard'
 import { TpoDashboard } from '@/features/tpo/core/pages/TpoDashboard'
 
-// Reusable placeholder component for pages being implemented across Dev 1, 2, 3
+// Reusable placeholder component for other pages
 function PagePlaceholder({ title, portal, devOwner }) {
   return (
     <div className="bg-white p-12 rounded-2xl border border-slate-200 text-center max-w-2xl mx-auto my-12 shadow-sm space-y-4">
@@ -23,13 +35,32 @@ function PagePlaceholder({ title, portal, devOwner }) {
 }
 
 export const router = createBrowserRouter([
+  // Authentication Routes (AuthLayout)
+  {
+    element: <AuthLayout />,
+    children: [
+      { path: '/login', element: <LoginPage /> },
+      { path: '/forgot-password', element: <ForgotPasswordPage /> },
+      { path: '/mfa', element: <MfaVerificationPage /> },
+    ],
+  },
+
+  // Main Portals (PortalLayout + RoleGuard)
   {
     path: '/',
-    element: <PortalLayout />,
+    element: (
+      <RoleGuard>
+        <PortalLayout />
+      </RoleGuard>
+    ),
     children: [
       { index: true, element: <Navigate to="/student/dashboard" replace /> },
       
-      // Student Portal (Dev 1)
+      // Shared in-app pages (X4, X5)
+      { path: 'notifications', element: <NotificationCentrePage /> },
+      { path: 'account', element: <MyAccountPrivacyPage /> },
+
+      // Student Portal (Dev 1, S1 - S19)
       { path: 'student/dashboard', element: <StudentDashboard /> },
       { path: 'student/profile', element: <PagePlaceholder title="S2: Placement Registration & Profile" portal="student" devOwner="Dev 1" /> },
       { path: 'student/resumes', element: <PagePlaceholder title="S3: My Resumes (Builder & Versions)" portal="student" devOwner="Dev 1" /> },
@@ -73,4 +104,9 @@ export const router = createBrowserRouter([
       { path: 'admin/audit', element: <PagePlaceholder title="AD7: Security, Privacy & Audit Trail" portal="admin" devOwner="Dev 3" /> },
     ],
   },
+
+  // Error Routes
+  { path: '/unauthorized', element: <UnauthorizedPage /> },
+  { path: '/server-error', element: <ServerErrorPage /> },
+  { path: '*', element: <NotFoundPage /> },
 ])
