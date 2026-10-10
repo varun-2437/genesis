@@ -4,6 +4,33 @@ import { PortalLayout } from '@/layouts/PortalLayout'
 import { StudentDashboard } from '@/features/student/pages/StudentDashboard'
 import { TpoDashboard } from '@/features/tpo/core/pages/TpoDashboard'
 
+import { CompaniesListPage } from '@/features/tpo/core/pages/CompaniesListPage'
+import { JobsListPage } from '@/features/tpo/core/pages/JobsListPage'
+import { StudentsListPage } from '@/features/tpo/core/pages/StudentsListPage'
+import { VerificationCentrePage } from '@/features/tpo/core/pages/VerificationCentrePage'
+import { DrivesListPage } from '@/features/tpo/core/pages/DrivesListPage'
+import { EligibilityRulesPage } from '@/features/tpo/core/pages/EligibilityRulesPage'
+import { ApplicationsManagementPage } from '@/features/tpo/core/pages/ApplicationsManagementPage'
+import { RoundsSelectionPipelinePage } from '@/features/tpo/core/pages/RoundsSelectionPipelinePage'
+import { InterviewSchedulerPage } from '@/features/tpo/core/pages/InterviewSchedulerPage'
+
+import { RecruiterDashboardPage } from '@/features/recruiter/pages/RecruiterDashboardPage'
+import { RecruiterProfilePage } from '@/features/recruiter/pages/RecruiterProfilePage'
+import { RecruiterJobsPage } from '@/features/recruiter/pages/RecruiterJobsPage'
+import { RecruiterDrivesPage } from '@/features/recruiter/pages/RecruiterDrivesPage'
+import { RecruiterCandidatesPage } from '@/features/recruiter/pages/RecruiterCandidatesPage'
+import { RecruiterInterviewsPage } from '@/features/recruiter/pages/RecruiterInterviewsPage'
+import { RecruiterOffersPage } from '@/features/recruiter/pages/RecruiterOffersPage'
+import { RecruiterFeedbackPage } from '@/features/recruiter/pages/RecruiterFeedbackPage'
+
+import { FacultyDashboardPage } from '@/features/faculty/pages/FacultyDashboardPage'
+import { FacultyReadinessPage } from '@/features/faculty/pages/FacultyReadinessPage'
+import { FacultyTrainingPage } from '@/features/faculty/pages/FacultyTrainingPage'
+import { FacultyMentoringPage } from '@/features/faculty/pages/FacultyMentoringPage'
+import { FacultyAssessmentPage } from '@/features/faculty/pages/FacultyAssessmentPage'
+import { FacultyReportsPage } from '@/features/faculty/pages/FacultyReportsPage'
+import { FacultyInternshipsPage } from '@/features/faculty/pages/FacultyInternshipsPage'
+
 // Reusable placeholder component for pages being implemented across Dev 1, 2, 3
 function PagePlaceholder({ title, portal, devOwner }) {
   return (
@@ -39,22 +66,35 @@ export const router = createBrowserRouter([
 
       // TPO Portal (Dev 2 Core + Dev 3 Extended)
       { path: 'tpo/dashboard', element: <TpoDashboard /> },
-      { path: 'tpo/students', element: <PagePlaceholder title="T2: Students List & 360 View" portal="tpo" devOwner="Dev 2" /> },
-      { path: 'tpo/companies', element: <PagePlaceholder title="T5: Companies Onboarding & List" portal="tpo" devOwner="Dev 2" /> },
-      { path: 'tpo/drives', element: <PagePlaceholder title="T9: Drives List & Scheduling" portal="tpo" devOwner="Dev 2" /> },
-      { path: 'tpo/applications', element: <PagePlaceholder title="T12: Applications Management & Bulk Shortlist" portal="tpo" devOwner="Dev 2" /> },
+      { path: 'tpo/students', element: <StudentsListPage /> },
+      { path: 'tpo/verification', element: <VerificationCentrePage /> },
+      { path: 'tpo/companies', element: <CompaniesListPage /> },
+      { path: 'tpo/jobs', element: <JobsListPage /> },
+      { path: 'tpo/drives', element: <DrivesListPage /> },
+      { path: 'tpo/eligibility', element: <EligibilityRulesPage /> },
+      { path: 'tpo/applications', element: <ApplicationsManagementPage /> },
+      { path: 'tpo/rounds', element: <RoundsSelectionPipelinePage /> },
+      { path: 'tpo/interviews', element: <InterviewSchedulerPage /> },
       { path: 'tpo/reports', element: <PagePlaceholder title="T30: Reports, NAAC/NIRF & Analytics" portal="tpo" devOwner="Dev 3" /> },
 
       // Recruiter Portal (Dev 2)
-      { path: 'recruiter/dashboard', element: <PagePlaceholder title="R1: Recruiter Dashboard" portal="recruiter" devOwner="Dev 2" /> },
-      { path: 'recruiter/jobs', element: <PagePlaceholder title="R3: Job Vacancies & Applications" portal="recruiter" devOwner="Dev 2" /> },
-      { path: 'recruiter/candidates', element: <PagePlaceholder title="R5: Eligible Candidates & Resumes" portal="recruiter" devOwner="Dev 2" /> },
-      { path: 'recruiter/interviews', element: <PagePlaceholder title="R7: Interviews & Evaluation" portal="recruiter" devOwner="Dev 2" /> },
+      { path: 'recruiter/dashboard', element: <RecruiterDashboardPage /> },
+      { path: 'recruiter/profile', element: <RecruiterProfilePage /> },
+      { path: 'recruiter/jobs', element: <RecruiterJobsPage /> },
+      { path: 'recruiter/drives', element: <RecruiterDrivesPage /> },
+      { path: 'recruiter/candidates', element: <RecruiterCandidatesPage /> },
+      { path: 'recruiter/interviews', element: <RecruiterInterviewsPage /> },
+      { path: 'recruiter/offers', element: <RecruiterOffersPage /> },
+      { path: 'recruiter/feedback', element: <RecruiterFeedbackPage /> },
 
       // Faculty Portal (Dev 2)
-      { path: 'faculty/dashboard', element: <PagePlaceholder title="F1: Department Placement Overview" portal="faculty" devOwner="Dev 2" /> },
-      { path: 'faculty/readiness', element: <PagePlaceholder title="F2: Student Readiness & Skill Gap" portal="faculty" devOwner="Dev 2" /> },
-      { path: 'faculty/internships', element: <PagePlaceholder title="F7: Internship Monitoring & Approval" portal="faculty" devOwner="Dev 2" /> },
+      { path: 'faculty/dashboard', element: <FacultyDashboardPage /> },
+      { path: 'faculty/readiness', element: <FacultyReadinessPage /> },
+      { path: 'faculty/training', element: <FacultyTrainingPage /> },
+      { path: 'faculty/mentoring', element: <FacultyMentoringPage /> },
+      { path: 'faculty/assessments', element: <FacultyAssessmentPage /> },
+      { path: 'faculty/reports', element: <FacultyReportsPage /> },
+      { path: 'faculty/internships', element: <FacultyInternshipsPage /> },
 
       // Management Portal (Dev 3)
       { path: 'management/dashboard', element: <PagePlaceholder title="M1: Institution-wide Placement Metrics" portal="management" devOwner="Dev 3" /> },
