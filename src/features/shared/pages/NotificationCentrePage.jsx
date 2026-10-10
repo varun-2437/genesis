@@ -130,12 +130,27 @@ export function NotificationCentrePage() {
                   </span>
                 </div>
                 <p className="text-xs text-slate-600 mt-1 leading-relaxed">{item.message}</p>
-                <div className="flex items-center gap-2 mt-2">
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 bg-slate-100 px-2 py-0.5 rounded">
-                    {item.category}
-                  </span>
-                  {item.unread && (
-                    <span className="w-2 h-2 rounded-full bg-indigo-600" />
+                <div className="flex items-center justify-between mt-3 pt-2 border-t border-slate-100">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 bg-slate-100 px-2 py-0.5 rounded">
+                      {item.category}
+                    </span>
+                    <span className="text-[10px] text-slate-400">
+                      Delivered · {item.unread ? 'Unread' : 'Read & Logged'}
+                    </span>
+                  </div>
+                  {item.type === 'ACTION_REQUIRED' && (
+                    <Button
+                      size="sm"
+                      variant="primary"
+                      className="text-xs py-1 px-3"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        alert(`Acknowledged: "${item.title}"`)
+                      }}
+                    >
+                      Acknowledge
+                    </Button>
                   )}
                 </div>
               </div>

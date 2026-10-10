@@ -66,3 +66,24 @@ export function ServerErrorPage() {
     </div>
   )
 }
+
+export function SessionExpiredPage() {
+  return (
+    <div className="min-h-[70vh] flex flex-col items-center justify-center text-center p-6 space-y-4">
+      <div className="w-16 h-16 bg-slate-100 text-slate-600 rounded-3xl flex items-center justify-center">
+        <ShieldAlert className="w-8 h-8" />
+      </div>
+      <div>
+        <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Session Expired</h1>
+        <p className="text-xs text-slate-500 max-w-sm mt-1">
+          Your security token has expired due to inactivity. Please log in again to renew your placement session.
+        </p>
+      </div>
+      <Link to="/login">
+        <Button size="sm">
+          Return to Sign In
+        </Button>
+      </Link>
+    </div>
+  )
+}
