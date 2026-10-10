@@ -12,7 +12,6 @@ import {
   Sliders,
   GitPullRequest,
   ArrowRight,
-  TrendingUp,
   Clock
 } from 'lucide-react'
 import { useTpoCoreStore } from '../tpoCoreStore'
@@ -32,84 +31,83 @@ export function TpoDashboard() {
     : '0.0'
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Action Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-line">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-            Placement Control Room & Executive Dashboard
-          </h2>
-          <p className="text-sm text-slate-500 mt-1">
-            Real-time telemetry of campus recruitment drives, student eligibility, and active company visits.
+          <h1 className="text-[22px] font-semibold text-fg tracking-tight">Placement Operations Control</h1>
+          <p className="text-xs text-fg-muted mt-0.5">
+            Institutional recruitment drive telemetry, student eligibility roster, and corporate visit tracking.
           </p>
         </div>
         <div className="flex items-center gap-2">
           <Link to="/tpo/eligibility">
-            <Button variant="outline" className="text-xs text-indigo-700 border-indigo-200 hover:bg-indigo-50 gap-1.5">
-              <Sliders className="w-3.5 h-3.5" /> Eligibility Engine
+            <Button variant="secondary" size="sm">
+              <Sliders size={14} strokeWidth={1.75} /> Eligibility Rules
             </Button>
           </Link>
           <Link to="/tpo/drives">
-            <Button className="bg-indigo-600 hover:bg-indigo-700 text-white text-xs gap-1.5 shadow-sm">
-              <Plus className="w-3.5 h-3.5" /> Schedule Drive
+            <Button variant="primary" size="sm">
+              <Plus size={14} strokeWidth={1.75} /> Schedule Drive
             </Button>
           </Link>
         </div>
       </div>
 
       {/* KPI Dynamic Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard 
-          title="Student Registry" 
+          label="Registered Students" 
           value={totalRegistered.toString()} 
-          subtitle={`${placedCount} placed (${placementRate}% placement rate)`} 
+          subtitle={`${placedCount} placed (${placementRate}% rate)`} 
           icon={Users} 
         />
         <StatCard 
-          title="Active Drives" 
+          label="Active Drives" 
           value={activeDrives.toString()} 
-          subtitle="Drives scheduled this season" 
+          subtitle="Drives in progress or upcoming" 
           icon={Calendar} 
         />
         <StatCard 
-          title="Partner Companies" 
+          label="Partner Companies" 
           value={activeCompanies.toString()} 
-          subtitle={`${companies.length} onboarded employers`} 
+          subtitle={`${companies.length} total enrolled`} 
           icon={Building2} 
         />
         <StatCard 
-          title="Average CTC" 
-          value={`₹ ${avgCtc} LPA`} 
-          trend={14} 
+          label="Average CTC" 
+          value={`INR ${avgCtc} LPA`} 
+          delta={14} 
           icon={Award} 
         />
       </div>
 
-      {/* Real-time Operations Monitor */}
+      {/* Operations Monitor Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Active Campus Drives */}
-        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="font-semibold text-slate-900 flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-indigo-600" /> Active Placement Drives
-            </h3>
-            <Link to="/tpo/drives" className="text-xs text-indigo-600 font-semibold hover:underline flex items-center gap-1">
-              View all <ArrowRight className="w-3 h-3" />
+        <div className="card p-0 overflow-hidden flex flex-col">
+          <div className="p-4 border-b border-line flex items-center justify-between bg-surface-2/30">
+            <div>
+              <h2 className="text-[14px] font-semibold text-fg">Active Placement Drives</h2>
+              <p className="text-xs text-fg-muted mt-0.5">Campus and virtual recruitment status</p>
+            </div>
+            <Link to="/tpo/drives" className="text-xs text-accent font-medium hover:underline flex items-center gap-1">
+              View all <ArrowRight size={13} strokeWidth={1.75} />
             </Link>
           </div>
 
-          <div className="space-y-3">
-            {drives.slice(0, 3).map((drv) => (
+          <div className="divide-y divide-line text-xs">
+            {drives.slice(0, 4).map((drv) => (
               <div
                 key={drv.id}
-                className="flex items-center justify-between p-3.5 bg-slate-50 rounded-xl border border-slate-100"
+                className="flex items-center justify-between p-3.5 hover:bg-surface-2/40 transition-colors"
               >
                 <div>
                   <div className="flex items-center gap-2">
-                    <p className="font-semibold text-slate-900 text-sm">{drv.companyName}</p>
-                    <span className="font-mono text-xs text-slate-400">[{drv.driveCode}]</span>
+                    <span className="font-semibold text-fg">{drv.companyName}</span>
+                    <span className="font-mono text-[11px] text-fg-muted">[{drv.driveCode}]</span>
                   </div>
-                  <p className="text-xs text-slate-500 mt-0.5">{drv.jobTitle} • {drv.venue}</p>
+                  <p className="text-fg-muted mt-0.5">{drv.jobTitle} · {drv.venue}</p>
                 </div>
                 <StatusBadge status={drv.status} />
               </div>
@@ -118,25 +116,26 @@ export function TpoDashboard() {
         </div>
 
         {/* Live Operations & Selection Pipeline */}
-        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="font-semibold text-slate-900 flex items-center gap-2">
-              <GitPullRequest className="w-4 h-4 text-indigo-600" /> Candidate Pipeline Status
-            </h3>
-            <Link to="/tpo/rounds" className="text-xs text-indigo-600 font-semibold hover:underline flex items-center gap-1">
-              Rounds Pipeline <ArrowRight className="w-3 h-3" />
+        <div className="card p-0 overflow-hidden flex flex-col">
+          <div className="p-4 border-b border-line flex items-center justify-between bg-surface-2/30">
+            <div>
+              <h2 className="text-[14px] font-semibold text-fg">Candidate Pipeline Status</h2>
+              <p className="text-xs text-fg-muted mt-0.5">Shortlisting and round movement queue</p>
+            </div>
+            <Link to="/tpo/rounds" className="text-xs text-accent font-medium hover:underline flex items-center gap-1">
+              Pipeline <ArrowRight size={13} strokeWidth={1.75} />
             </Link>
           </div>
 
-          <div className="space-y-3">
-            {applications.slice(0, 3).map((app) => (
+          <div className="divide-y divide-line text-xs">
+            {applications.slice(0, 4).map((app) => (
               <div
                 key={app.id}
-                className="flex items-center justify-between p-3.5 bg-slate-50 rounded-xl border border-slate-100"
+                className="flex items-center justify-between p-3.5 hover:bg-surface-2/40 transition-colors"
               >
                 <div>
-                  <p className="font-semibold text-slate-900 text-sm">{app.studentName}</p>
-                  <p className="text-xs text-slate-500">{app.department} • Stage: {app.currentRoundName}</p>
+                  <p className="font-semibold text-fg">{app.studentName}</p>
+                  <p className="text-fg-muted mt-0.5">{app.department} · Round: {app.currentRoundName}</p>
                 </div>
                 <StatusBadge status={app.status} />
               </div>

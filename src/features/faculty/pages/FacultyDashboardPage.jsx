@@ -4,12 +4,9 @@ import {
   GraduationCap, 
   Users, 
   Award, 
-  TrendingUp, 
   ArrowRight, 
   AlertTriangle, 
-  CheckCircle2, 
-  FileSpreadsheet,
-  BookOpen
+  FileSpreadsheet
 } from 'lucide-react'
 import { useFacultyStore } from '../facultyStore'
 import { StatCard } from '@/components/shared/StatCard'
@@ -32,139 +29,113 @@ export function FacultyDashboardPage() {
   const atRiskStudents = studentsReadiness.filter((s) => s.status === 'NEEDS_REMEDIAL').length
 
   return (
-    <div className="space-y-8">
-      {/* Header Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-gradient-to-r from-slate-900 to-indigo-950 rounded-2xl text-white shadow-sm">
+    <div className="space-y-6">
+      {/* Header Banner - Restrained Enterprise Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-line">
         <div>
-          <span className="px-2.5 py-1 bg-indigo-500/30 text-indigo-200 border border-indigo-400/30 rounded-full text-xs font-semibold uppercase tracking-wider">
-            Department Portal
-          </span>
-          <h1 className="text-2xl font-bold mt-2 tracking-tight">
-            {department} Placement Cell
-          </h1>
-          <p className="text-sm text-slate-300 mt-1">
-            Head of Department: {hodName} • Academic Year 2025-2026 Graduating Batch
+          <h1 className="text-[22px] font-semibold text-fg tracking-tight">{department} Department Operations</h1>
+          <p className="text-xs text-fg-muted mt-0.5">
+            Coordinator: {hodName} · Graduating Batch 2026 Telemetry
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <Link to="/faculty/reports">
-            <Button className="bg-indigo-600 hover:bg-indigo-500 text-white text-xs gap-1.5 shadow-sm">
-              <FileSpreadsheet className="w-3.5 h-3.5" /> Department NIRF Report
+            <Button variant="secondary" size="sm">
+              <FileSpreadsheet size={14} strokeWidth={1.75} /> NIRF Department Report
             </Button>
           </Link>
         </div>
       </div>
 
       {/* KPI Stat Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
-          title="Cohort Placement Rate"
-          value={`${placementRate}%`}
-          subtitle={`${placedStudents} of ${totalStudents} Students Placed`}
-          trend={12}
-          icon={TrendingUp}
+          label="Total Cohort"
+          value={totalStudents.toString()}
+          subtitle={`${placedStudents} placed (${placementRate}%)`}
+          icon={GraduationCap}
         />
         <StatCard
-          title="Average Department CTC"
-          value={`₹ ${avgPackageLPA} LPA`}
-          subtitle="Top: ₹ 44.0 LPA"
+          label="Average Package"
+          value={`INR ${avgPackageLPA} LPA`}
+          subtitle={`Highest: INR ${highestPackageLPA} LPA`}
           icon={Award}
         />
         <StatCard
-          title="At-Risk Remedial Cohort"
+          label="At-Risk Students"
           value={atRiskStudents.toString()}
-          subtitle="Requires faculty intervention"
+          subtitle="Requires technical remedial"
           icon={AlertTriangle}
         />
         <StatCard
-          title="Pending Internship NOCs"
+          label="Pending NOCs"
           value={pendingInternships.toString()}
-          subtitle="Student applications to review"
-          icon={BookOpen}
+          subtitle="Internship sign-offs needed"
+          icon={Users}
         />
       </div>
 
-      {/* Main Panels */}
+      {/* Two Columns: Readiness & Internships */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Readiness Snapshot */}
-        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="font-bold text-slate-900 text-sm flex items-center gap-2">
-              <Users className="w-4 h-4 text-indigo-600" /> Student Placement Readiness Radar
-            </h3>
-            <Link to="/faculty/readiness" className="text-xs text-indigo-600 font-semibold hover:underline flex items-center gap-1">
-              View all students <ArrowRight className="w-3 h-3" />
+        {/* Readiness Overview */}
+        <div className="card p-0 overflow-hidden flex flex-col">
+          <div className="p-4 border-b border-line flex items-center justify-between bg-surface-2/30">
+            <div>
+              <h2 className="text-[14px] font-semibold text-fg">Student Skill Readiness Radar</h2>
+              <p className="text-xs text-fg-muted mt-0.5">Mock assessments and technical preparation</p>
+            </div>
+            <Link to="/faculty/readiness" className="text-xs text-accent font-medium hover:underline flex items-center gap-1">
+              Readiness Hub <ArrowRight size={13} strokeWidth={1.75} />
             </Link>
           </div>
 
-          <div className="space-y-3">
-            {studentsReadiness.map((stu) => (
-              <div
-                key={stu.id}
-                className="p-3.5 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-between"
-              >
+          <div className="divide-y divide-line text-xs">
+            {studentsReadiness.slice(0, 4).map((item) => (
+              <div key={item.id} className="p-3.5 flex items-center justify-between hover:bg-surface-2/40 transition-colors">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-slate-900 text-sm">{stu.name}</span>
-                    <span className="font-mono text-xs text-slate-400">[{stu.registerNumber}]</span>
+                    <span className="font-semibold text-fg">{item.name}</span>
+                    <span className="font-mono text-[11px] text-fg-muted">[{item.regNo}]</span>
                   </div>
-                  <p className="text-xs text-slate-500 mt-0.5">
-                    CGPA: <strong>{stu.cgpa}</strong> • Backlogs: <strong>{stu.activeBacklogs}</strong>
-                  </p>
+                  <p className="text-fg-muted mt-0.5">CGPA: {item.cgpa} · Readiness: {item.readinessScore}%</p>
                 </div>
-                <div className="text-right">
-                  <span
-                    className={`px-2.5 py-1 rounded-full text-xs font-bold border ${
-                      stu.status === 'HIGH_READINESS'
-                        ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
-                        : stu.status === 'NEEDS_REMEDIAL'
-                        ? 'bg-rose-50 text-rose-700 border-rose-200'
-                        : 'bg-amber-50 text-amber-700 border-amber-200'
-                    }`}
-                  >
-                    Readiness: {stu.readinessScore}%
-                  </span>
-                </div>
+                <span className={`badge ${
+                  item.status === 'READY' ? 'bg-success-soft text-success' : 'bg-warning-soft text-warning'
+                }`}>
+                  {item.status}
+                </span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Quick Internship NOC Review */}
-        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="font-bold text-slate-900 text-sm flex items-center gap-2">
-              <BookOpen className="w-4 h-4 text-indigo-600" /> Industry Internship NOC Approvals
-            </h3>
-            <Link to="/faculty/internships" className="text-xs text-indigo-600 font-semibold hover:underline flex items-center gap-1">
-              Manage Internships <ArrowRight className="w-3 h-3" />
+        {/* Pending Internships */}
+        <div className="card p-0 overflow-hidden flex flex-col">
+          <div className="p-4 border-b border-line flex items-center justify-between bg-surface-2/30">
+            <div>
+              <h2 className="text-[14px] font-semibold text-fg">Internship Clearances (NOC)</h2>
+              <p className="text-xs text-fg-muted mt-0.5">Corporate internships pending approval</p>
+            </div>
+            <Link to="/faculty/internships" className="text-xs text-accent font-medium hover:underline flex items-center gap-1">
+              Approvals <ArrowRight size={13} strokeWidth={1.75} />
             </Link>
           </div>
 
-          <div className="space-y-3">
-            {internships.map((intItem) => (
-              <div
-                key={intItem.id}
-                className="p-3.5 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-between"
-              >
+          <div className="divide-y divide-line text-xs">
+            {internships.map((intern) => (
+              <div key={intern.id} className="p-3.5 flex items-center justify-between hover:bg-surface-2/40 transition-colors">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-slate-900 text-sm">{intItem.studentName}</span>
-                    <span className="font-mono text-xs text-slate-400">[{intItem.registerNumber}]</span>
+                    <span className="font-semibold text-fg">{intern.studentName}</span>
+                    <span className="text-fg-muted">({intern.company})</span>
                   </div>
-                  <p className="text-xs text-slate-600 mt-0.5">
-                    {intItem.company} • Stipend: {intItem.stipend}
-                  </p>
+                  <p className="text-fg-muted mt-0.5">{intern.role} · Stipend: INR {intern.stipend} · {intern.duration}</p>
                 </div>
-                <span
-                  className={`text-[11px] font-bold px-2.5 py-0.5 rounded-md border ${
-                    intItem.status === 'APPROVED'
-                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
-                      : 'bg-amber-50 text-amber-700 border-amber-200'
-                  }`}
-                >
-                  {intItem.status}
+                <span className={`badge ${
+                  intern.status === 'APPROVED' ? 'bg-success-soft text-success' : 'bg-warning-soft text-warning'
+                }`}>
+                  {intern.status}
                 </span>
               </div>
             ))}

@@ -6,9 +6,9 @@ export const Input = React.forwardRef(
     const inputId = id || props.name || Math.random().toString(36).substring(2, 9)
 
     return (
-      <div className="w-full space-y-1.5">
+      <div className="w-full space-y-1">
         {label && (
-          <label htmlFor={inputId} className="block text-xs font-semibold text-slate-700">
+          <label htmlFor={inputId} className="block text-[12.5px] font-medium text-fg">
             {label}
           </label>
         )}
@@ -16,18 +16,15 @@ export const Input = React.forwardRef(
           id={inputId}
           ref={ref}
           className={cn(
-            'w-full px-3 py-2 text-sm bg-white border rounded-lg transition-colors shadow-sm outline-none',
-            'placeholder:text-slate-400 text-slate-900',
-            'focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500',
-            error
-              ? 'border-rose-400 focus:ring-rose-400 focus:border-rose-400'
-              : 'border-slate-300 hover:border-slate-400',
+            'w-full h-9 px-3 text-sm bg-surface border border-line-strong rounded-[6px] text-fg transition-colors outline-none',
+            'placeholder:text-fg-subtle hover:border-fg-subtle focus:border-accent disabled:bg-surface-2 disabled:text-fg-subtle disabled:cursor-not-allowed',
+            error && 'border-danger focus:border-danger',
             className
           )}
           {...props}
         />
-        {error && <p className="text-xs text-rose-600 font-medium">{error}</p>}
-        {helperText && !error && <p className="text-xs text-slate-500">{helperText}</p>}
+        {error && <p className="text-xs text-danger font-medium mt-1">{error}</p>}
+        {helperText && !error && <p className="text-xs text-fg-muted mt-1">{helperText}</p>}
       </div>
     )
   }

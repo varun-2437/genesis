@@ -5,11 +5,8 @@ import {
   Building2,
   Users,
   CheckCircle,
-  FileCheck,
   Calendar,
-  AlertCircle,
-  ArrowUpRight,
-  ShieldAlert
+  AlertCircle
 } from 'lucide-react'
 import { ChartCard } from '@/components/shared/ChartCard'
 import { StatCard } from '@/components/shared/StatCard'
@@ -30,7 +27,7 @@ const MONTHLY_DRIVE_ACTIVITY = [
   { name: 'Aug', companies: 24, offers: 112 },
   { name: 'Sep', companies: 38, offers: 198 },
   { name: 'Oct', companies: 45, offers: 240 },
-  { name: 'Nov (Proj)', companies: 22, offers: 95 }
+  { name: 'Nov', companies: 22, offers: 95 }
 ]
 
 const PENDING_GOVERNANCE_ITEMS = [
@@ -72,136 +69,119 @@ export function ManagementDashboard() {
 
   return (
     <div className="space-y-6">
-      {/* Top Banner */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      {/* Top Header */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-2 border-b border-line">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700">Management M1</span>
-            <h1 className="text-2xl font-bold text-slate-900">Executive Placement Dashboard</h1>
-          </div>
-          <p className="text-sm text-slate-500 mt-1">
-            Top-level institutional health, recruiter engagement, package statistics, and governance sign-offs.
+          <h1 className="text-[22px] font-semibold text-fg tracking-tight">Executive Management Overview</h1>
+          <p className="text-xs text-fg-muted mt-0.5">
+            Institutional placement conversions, salary distributions, and governance approvals.
           </p>
         </div>
-        <div className="flex items-center gap-3">
-          <Button variant="outline" className="flex items-center gap-2">
-            <Calendar className="w-4 h-4 text-slate-500" />
-            Academic Session 2025-2026
+        <div className="flex items-center gap-2">
+          <Button variant="secondary" size="sm">
+            <Calendar size={14} strokeWidth={1.75} /> Session 2025-2026
           </Button>
-          <Button variant="default" className="flex items-center gap-2">
+          <Button variant="primary" size="sm">
             Generate Principal Report
           </Button>
         </div>
       </div>
 
-      {/* High-Level Institutional KPI Cards */}
+      {/* Institutional KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
-          title="Campus Placement Rate"
+          label="Placement Rate"
           value="88.6%"
           icon={TrendingUp}
-          change="+4.2% vs previous cohort"
-          trend="up"
+          delta={4.2}
         />
         <StatCard
-          title="Average CTC Package"
+          label="Average CTC"
           value="INR 13.8 LPA"
           icon={Award}
-          change="Median: 11.5 LPA"
-          trend="up"
+          subtitle="Median: 11.5 LPA"
         />
         <StatCard
-          title="Visiting Recruiters"
-          value="137 Companies"
+          label="Visiting Recruiters"
+          value="137"
           icon={Building2}
-          change="32 Super Dream partners"
-          trend="up"
+          subtitle="32 Super Dream tier"
         />
         <StatCard
-          title="Offers Released"
-          value="628 Total"
+          label="Total Offers Released"
+          value="628"
           icon={Users}
-          change="84% acceptance rate"
-          trend="neutral"
+          subtitle="84% acceptance rate"
         />
       </div>
 
       {/* Main Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <ChartCard
-          title="Department-wise Placement % & Average Salary"
-          subtitle="Cross-faculty comparison of placement conversions and package scale"
+          title="Discipline Placement & Average Salary"
+          subtitle="Cross-department conversions and package distribution"
           type="bar"
           data={PLACEMENT_BY_DISCIPLINE}
           dataKeys={[
-            { key: 'placedPct', name: 'Placement Rate (%)', color: '#6366f1' },
-            { key: 'avgCTC', name: 'Average CTC (LPA)', color: '#10b981' }
+            { key: 'placedPct', name: 'Placement Rate (%)' },
+            { key: 'avgCTC', name: 'Average CTC (LPA)' }
           ]}
-          height={320}
+          height={280}
         />
 
         <ChartCard
-          title="Recruiter Visits & Offers Generated Over Time"
-          subtitle="Monthly recruitment drive throughput and candidate selections"
+          title="Drive Activity & Offers Volume"
+          subtitle="Monthly corporate visits and offer releases"
           type="area"
           data={MONTHLY_DRIVE_ACTIVITY}
           dataKeys={[
-            { key: 'offers', name: 'Offers Released', color: '#3b82f6' },
-            { key: 'companies', name: 'Companies Visited', color: '#f59e0b' }
+            { key: 'companies', name: 'Companies Visited' },
+            { key: 'offers', name: 'Offers Released' }
           ]}
-          height={320}
+          height={280}
         />
       </div>
 
-      {/* Governance & Policy Approvals Section */}
-      <div className="bg-white rounded-xl border border-slate-200/80 shadow-sm p-5 space-y-4">
-        <div className="flex items-center justify-between">
+      {/* Governance & Policy Approvals Queue */}
+      <div className="card p-0 overflow-hidden">
+        <div className="p-4 border-b border-line flex items-center justify-between bg-surface-2/30">
           <div>
-            <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-              <ShieldAlert className="w-4 h-4 text-indigo-600" />
-              Executive Governance & Policy Approval Queue (M7 Sync)
-            </h3>
-            <p className="text-xs text-slate-500 mt-0.5">
-              Requires institutional authorization from Principal / Management Board before taking legal effect.
-            </p>
+            <h2 className="text-[14px] font-semibold text-fg">Executive Sign-off Queue</h2>
+            <p className="text-xs text-fg-muted mt-0.5">Policy revisions and institutional budgets pending approval</p>
           </div>
-          <span className="text-xs font-medium text-slate-500">
-            {governanceItems.filter(i => i.status === 'Pending Approval').length} Items Awaiting Sign-off
+          <span className="text-xs text-fg-muted">
+            {governanceItems.filter(i => i.status !== 'Approved').length} items awaiting sign-off
           </span>
         </div>
 
-        <div className="divide-y divide-slate-100">
-          {governanceItems.map((item) => (
-            <div key={item.id} className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div>
+        <div className="divide-y divide-line text-xs">
+          {governanceItems.map(item => (
+            <div key={item.id} className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-surface-2/40 transition-colors">
+              <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <span className="font-semibold text-slate-900 text-sm">{item.title}</span>
-                  <span className={`text-[10px] px-2 py-0.5 rounded font-semibold ${
-                    item.urgency === 'High' ? 'bg-rose-50 text-rose-700' : 'bg-slate-100 text-slate-700'
-                  }`}>
-                    {item.urgency} Priority
-                  </span>
+                  <span className="font-semibold text-fg text-sm">{item.title}</span>
+                  <span className="font-mono text-[11px] text-fg-muted">[{item.id}]</span>
+                  <span className="badge bg-surface-2 text-fg-muted border-line">{item.module}</span>
                 </div>
-                <div className="text-xs text-slate-500 mt-1 flex items-center gap-2">
-                  <span>{item.module}</span>
-                  <span>•</span>
-                  <span>Submitted by: <strong>{item.submittedBy}</strong></span>
-                  <span>•</span>
-                  <span>{item.date}</span>
-                </div>
+                <p className="text-fg-muted">
+                  Submitted by {item.submittedBy} · {item.date} · Urgency: {item.urgency}
+                </p>
               </div>
 
-              <div className="flex items-center gap-3">
-                <StatusBadge status={item.status} />
-                {item.status !== 'Approved' && (
-                  <Button
-                    size="sm"
-                    variant="default"
-                    className="text-xs h-8"
-                    onClick={() => handleApprove(item.id)}
-                  >
-                    Authorize & Sign
-                  </Button>
+              <div className="flex items-center gap-2.5 shrink-0">
+                {item.status === 'Approved' ? (
+                  <span className="badge bg-success-soft text-success">
+                    <CheckCircle size={12} strokeWidth={1.75} /> Signed off
+                  </span>
+                ) : (
+                  <>
+                    <Button variant="secondary" size="sm" onClick={() => handleApprove(item.id)}>
+                      Review Details
+                    </Button>
+                    <Button variant="primary" size="sm" onClick={() => handleApprove(item.id)}>
+                      Authorize & Approve
+                    </Button>
+                  </>
                 )}
               </div>
             </div>

@@ -7,158 +7,158 @@ import {
   Briefcase, 
   Calendar, 
   CheckCircle2, 
-  TrendingUp, 
-  AlertCircle, 
-  FileText, 
-  Sparkles, 
+  Clock, 
   ArrowRight,
-  Clock,
-  Building,
-  Target
+  AlertCircle,
+  FileCheck
 } from 'lucide-react'
 
 export function StudentDashboard() {
-  const [profileComplete, setProfileComplete] = useState(88)
+  const [profileComplete] = useState(88)
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto">
-      {/* Top Banner with Readiness Indicator & Announcements */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-indigo-900 via-slate-900 to-indigo-950 rounded-2xl p-8 text-white shadow-lg border border-indigo-800/40">
-        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-          <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 text-indigo-200 rounded-full text-xs font-semibold backdrop-blur-md">
-              <Sparkles className="w-3.5 h-3.5 text-indigo-400" /> Cycle 2026-27 Active · Verified Candidate
-            </div>
-            <h2 className="text-3xl font-extrabold tracking-tight">Welcome back, Varun M</h2>
-            <p className="text-slate-300 text-sm leading-relaxed">
-              Your placement profile is verified. You qualify for <strong>4 upcoming campus drives</strong> this week.
-            </p>
-          </div>
-
-          <div className="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10 flex items-center gap-5 shrink-0">
-            <div>
-              <p className="text-xs font-medium text-indigo-200">Placement Readiness</p>
-              <p className="text-2xl font-bold text-white mt-0.5">{profileComplete}%</p>
-              <div className="w-32 bg-white/20 h-2 rounded-full overflow-hidden mt-1.5">
-                <div className="bg-emerald-400 h-full rounded-full" style={{ width: `${profileComplete}%` }} />
-              </div>
-            </div>
-            <Link to="/student/profile">
-              <Button size="sm" className="bg-white text-indigo-900 hover:bg-slate-100 text-xs font-semibold">
-                Complete 100%
-              </Button>
-            </Link>
-          </div>
+    <div className="space-y-6">
+      {/* Page Header */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-line">
+        <div>
+          <h1 className="text-[22px] font-semibold text-fg tracking-tight">Student Dashboard</h1>
+          <p className="text-xs text-fg-muted mt-0.5">
+            Academic Year 2026-27 · Placement Roster Verified
+          </p>
         </div>
-
-        {/* Live Urgent Alert Bar */}
-        <div className="mt-6 pt-5 border-t border-white/10 flex items-center justify-between text-xs text-indigo-100 flex-wrap gap-3">
-          <div className="flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
-            <span><strong>Urgent Deadline:</strong> Google Cloud Campus registration closes tonight at 11:59 PM.</span>
-          </div>
-          <Link to="/student/jobs" className="text-white underline font-semibold flex items-center gap-1 hover:text-indigo-200">
-            Apply now <ArrowRight className="w-3.5 h-3.5" />
+        <div className="flex items-center gap-2">
+          <Link to="/student/jobs">
+            <Button variant="primary" size="sm">
+              <Briefcase size={16} strokeWidth={1.75} /> Browse Openings
+            </Button>
+          </Link>
+          <Link to="/student/profile">
+            <Button variant="secondary" size="sm">
+              View Profile
+            </Button>
           </Link>
         </div>
       </div>
 
-      {/* KPI Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <StatCard title="Active Applications" value="3" subtitle="1 in Technical Round" icon={Briefcase} />
-        <StatCard title="Upcoming Drives" value="5" subtitle="This month" icon={Calendar} />
-        <StatCard title="Offers Pending" value="1" subtitle="CTC: ₹ 14.5 LPA" icon={CheckCircle2} />
-        <StatCard title="AI Skill Match Score" value="92%" trend={8} icon={Target} />
+      {/* Readiness & Notice Banner - Restrained Enterprise Look (No gradients or glowing blobs) */}
+      <div className="card p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-surface-2/40">
+        <div className="space-y-1 max-w-xl">
+          <div className="flex items-center gap-2">
+            <FileCheck size={16} strokeWidth={1.75} className="text-accent" />
+            <span className="text-xs font-semibold text-fg">Profile Completeness & Verification</span>
+          </div>
+          <p className="text-xs text-fg-muted">
+            Your primary resume and academic transcripts have been verified by the placement cell.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
+          <div className="text-right">
+            <span className="text-xs font-medium text-fg-muted block">Readiness Score</span>
+            <span className="text-xl font-semibold text-fg tabular-nums">{profileComplete}%</span>
+          </div>
+          <div className="w-28 bg-surface border border-line h-2 rounded overflow-hidden">
+            <div className="bg-accent h-full rounded" style={{ width: `${profileComplete}%` }} />
+          </div>
+          <Link to="/student/profile">
+            <Button variant="secondary" size="sm">Update</Button>
+          </Link>
+        </div>
       </div>
 
-      {/* Main Content Layout: Active Drives & Applications */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left Column: Recent Applications */}
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
-          <div className="p-6 border-b border-slate-200 flex items-center justify-between">
+      {/* Urgent Notice Alert */}
+      <div className="p-3.5 bg-warning-soft border border-warning/20 rounded-[6px] text-xs text-warning flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <AlertCircle size={16} strokeWidth={1.75} className="shrink-0" />
+          <span><strong>Deadline Alert:</strong> Google Cloud Campus registration closes tonight at 11:59 PM IST.</span>
+        </div>
+        <Link to="/student/jobs" className="font-semibold underline shrink-0 hover:opacity-80">
+          Apply Now
+        </Link>
+      </div>
+
+      {/* KPI Cards Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatCard label="Active Applications" value="3" subtitle="1 in technical interview" icon={Briefcase} />
+        <StatCard label="Upcoming Drives" value="5" subtitle="Scheduled this month" icon={Calendar} />
+        <StatCard label="Offers Released" value="1" subtitle="CTC: INR 14.5 LPA" icon={CheckCircle2} />
+        <StatCard label="Verified Skills" value="18" subtitle="Matched against open JDs" delta={8} />
+      </div>
+
+      {/* Main Grid: Applications Tracker & Quick Actions */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Left: Applications Table */}
+        <div className="lg:col-span-2 card p-0 overflow-hidden flex flex-col">
+          <div className="p-4 border-b border-line flex items-center justify-between bg-surface-2/30">
             <div>
-              <h3 className="font-bold text-slate-900">My Applications & Progress</h3>
-              <p className="text-xs text-slate-500 mt-0.5">Live tracking through recruitment stages</p>
+              <h2 className="text-[14px] font-semibold text-fg">Active Applications</h2>
+              <p className="text-xs text-fg-muted mt-0.5">Live recruitment pipeline progress</p>
             </div>
             <Link to="/student/applications">
-              <Button variant="ghost" size="sm" className="text-xs">View History</Button>
+              <Button variant="ghost" size="sm">View History</Button>
             </Link>
           </div>
 
-          <div className="divide-y divide-slate-100 flex-1">
-            <div className="p-5 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4">
-              <div className="flex items-center gap-4 min-w-0">
-                <div className="w-11 h-11 bg-indigo-50 text-indigo-700 font-bold rounded-xl flex items-center justify-center shrink-0">
-                  GC
+          <div className="divide-y divide-line text-sm">
+            <div className="p-4 flex items-center justify-between gap-3 hover:bg-surface-2/40 transition-colors">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold text-fg">Google Cloud India</span>
+                  <span className="text-xs text-fg-muted">· Associate Cloud Engineer</span>
                 </div>
-                <div className="min-w-0">
-                  <h4 className="text-sm font-semibold text-slate-900 truncate">Google Cloud India</h4>
-                  <p className="text-xs text-slate-500">Associate Cloud Engineer · Full Time</p>
-                  <p className="text-[11px] text-indigo-600 font-medium mt-1 flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5" /> Next: Technical Interview · Tomorrow 10:30 AM
-                  </p>
+                <div className="flex items-center gap-2 mt-1 text-xs text-fg-muted">
+                  <Clock size={13} strokeWidth={1.75} />
+                  <span>Technical Interview · Tomorrow 10:30 AM</span>
                 </div>
               </div>
               <div className="text-right shrink-0">
                 <StatusBadge status="SHORTLISTED" />
-                <p className="text-xs font-bold text-slate-900 mt-1.5">₹ 18.0 LPA</p>
+                <p className="text-xs font-semibold text-fg mt-1 tabular-nums">INR 18.0 LPA</p>
               </div>
             </div>
 
-            <div className="p-5 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4">
-              <div className="flex items-center gap-4 min-w-0">
-                <div className="w-11 h-11 bg-slate-100 text-slate-700 font-bold rounded-xl flex items-center justify-center shrink-0">
-                  ORA
+            <div className="p-4 flex items-center justify-between gap-3 hover:bg-surface-2/40 transition-colors">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold text-fg">Oracle Corporation</span>
+                  <span className="text-xs text-fg-muted">· Software Developer 1</span>
                 </div>
-                <div className="min-w-0">
-                  <h4 className="text-sm font-semibold text-slate-900 truncate">Oracle Corporation</h4>
-                  <p className="text-xs text-slate-500">Software Developer 1 · Pune/Bengaluru</p>
-                  <p className="text-[11px] text-slate-400 mt-1">Under Initial Resume Screening</p>
-                </div>
+                <p className="text-xs text-fg-muted mt-1">Application under screening</p>
               </div>
               <div className="text-right shrink-0">
                 <StatusBadge status="IN_REVIEW" />
-                <p className="text-xs font-bold text-slate-900 mt-1.5">₹ 14.5 LPA</p>
+                <p className="text-xs font-semibold text-fg mt-1 tabular-nums">INR 14.5 LPA</p>
               </div>
             </div>
 
-            <div className="p-5 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4">
-              <div className="flex items-center gap-4 min-w-0">
-                <div className="w-11 h-11 bg-emerald-50 text-emerald-700 font-bold rounded-xl flex items-center justify-center shrink-0">
-                  CTS
+            <div className="p-4 flex items-center justify-between gap-3 hover:bg-surface-2/40 transition-colors">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold text-fg">Cognizant</span>
+                  <span className="text-xs text-fg-muted">· GenC Next Developer</span>
                 </div>
-                <div className="min-w-0">
-                  <h4 className="text-sm font-semibold text-slate-900 truncate">Cognizant</h4>
-                  <p className="text-xs text-slate-500">GenC Next Developer · Chennai</p>
-                  <p className="text-[11px] text-emerald-600 font-semibold mt-1 flex items-center gap-1">
-                    <CheckCircle2 className="w-3.5 h-3.5" /> Offer Letter Ready to Accept
-                  </p>
-                </div>
+                <p className="text-xs text-success mt-1 font-medium">Offer released & pending confirmation</p>
               </div>
               <div className="text-right shrink-0">
                 <StatusBadge status="SELECTED" />
-                <p className="text-xs font-bold text-slate-900 mt-1.5">₹ 6.75 LPA</p>
+                <p className="text-xs font-semibold text-fg mt-1 tabular-nums">INR 6.75 LPA</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Right Column: Upcoming Calendar & Action Hub */}
-        <div className="space-y-6">
-          {/* Quick Offer Alert */}
-          <div className="bg-emerald-900 text-white p-6 rounded-2xl shadow-sm border border-emerald-800 relative overflow-hidden">
-            <div className="relative z-10 space-y-3">
-              <span className="px-2.5 py-0.5 bg-emerald-700/80 rounded-full text-[10px] font-bold uppercase tracking-wider">
-                Action Required
-              </span>
-              <h4 className="text-lg font-bold">1 Final Offer Letter Received</h4>
-              <p className="text-xs text-emerald-100">
-                Cognizant has released your formal offer letter. You have <strong>3 days</strong> to respond under institutional policy.
-              </p>
-              <Link to="/student/offers" className="inline-block pt-1">
-                <Button size="sm" className="bg-white text-emerald-900 hover:bg-emerald-50 border-none font-semibold text-xs">
+        {/* Right: Offer Action & Recommended Openings */}
+        <div className="space-y-4">
+          {/* Offer Notification Box */}
+          <div className="card p-5 border-l-4 border-l-success space-y-2.5">
+            <span className="badge bg-success-soft text-success">Decision Required</span>
+            <h3 className="text-[14px] font-semibold text-fg">Formal Offer Received</h3>
+            <p className="text-xs text-fg-muted leading-relaxed">
+              Cognizant has issued your employment letter. Under institutional placement guidelines, you have <strong>3 days</strong> to respond.
+            </p>
+            <div className="pt-1">
+              <Link to="/student/offers">
+                <Button variant="primary" size="sm" className="w-full">
                   Review & Respond
                 </Button>
               </Link>
@@ -166,40 +166,36 @@ export function StudentDashboard() {
           </div>
 
           {/* Recommended Jobs */}
-          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div className="card p-5 space-y-3">
             <div className="flex items-center justify-between">
-              <h4 className="font-bold text-slate-900 text-sm">Recommended For You</h4>
-              <Link to="/student/jobs" className="text-xs text-indigo-600 font-semibold hover:underline">
-                Explore All
+              <h3 className="text-[14px] font-semibold text-fg">Recommended Roles</h3>
+              <Link to="/student/jobs" className="text-xs text-accent font-medium hover:underline">
+                View All
               </Link>
             </div>
 
-            <div className="space-y-3">
-              <div className="p-3.5 rounded-xl border border-slate-100 bg-slate-50 hover:bg-indigo-50/50 hover:border-indigo-200 transition-all">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h5 className="text-xs font-bold text-slate-900">Microsoft India</h5>
-                    <p className="text-[11px] text-slate-500">Software Engineering Intern</p>
-                  </div>
-                  <span className="text-[10px] font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded">96% Match</span>
+            <div className="space-y-2 text-xs">
+              <div className="p-3 rounded border border-line bg-surface-2/40 space-y-1">
+                <div className="flex items-center justify-between">
+                  <span className="font-semibold text-fg">Microsoft India</span>
+                  <span className="badge bg-accent-soft text-accent">96% Fit</span>
                 </div>
-                <div className="mt-2.5 flex items-center justify-between text-[11px]">
-                  <span className="font-semibold text-slate-700">₹ 80,000 / month</span>
-                  <span className="text-slate-400">Apply by Oct 20</span>
+                <p className="text-fg-muted">Software Engineering Intern</p>
+                <div className="flex items-center justify-between pt-1 text-[11px] text-fg-muted">
+                  <span className="font-medium text-fg tabular-nums">INR 80,000 / mo</span>
+                  <span>Closes Oct 20</span>
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl border border-slate-100 bg-slate-50 hover:bg-indigo-50/50 hover:border-indigo-200 transition-all">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h5 className="text-xs font-bold text-slate-900">Amazon Web Services</h5>
-                    <p className="text-[11px] text-slate-500">Cloud Support Associate</p>
-                  </div>
-                  <span className="text-[10px] font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded">91% Match</span>
+              <div className="p-3 rounded border border-line bg-surface-2/40 space-y-1">
+                <div className="flex items-center justify-between">
+                  <span className="font-semibold text-fg">Amazon Web Services</span>
+                  <span className="badge bg-accent-soft text-accent">91% Fit</span>
                 </div>
-                <div className="mt-2.5 flex items-center justify-between text-[11px]">
-                  <span className="font-semibold text-slate-700">₹ 12.0 LPA</span>
-                  <span className="text-slate-400">Apply by Oct 24</span>
+                <p className="text-fg-muted">Cloud Support Associate</p>
+                <div className="flex items-center justify-between pt-1 text-[11px] text-fg-muted">
+                  <span className="font-medium text-fg tabular-nums">INR 12.0 LPA</span>
+                  <span>Closes Oct 24</span>
                 </div>
               </div>
             </div>

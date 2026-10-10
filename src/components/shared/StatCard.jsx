@@ -1,22 +1,25 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
 
-export function StatCard({ title, value, subtitle, icon: Icon, trend, className }) {
+export function StatCard({ title, label, value, subtitle, icon: Icon, delta, trend, className }) {
+  const displayLabel = label || title
+  const displayTrend = delta !== undefined ? delta : trend
+
   return (
-    <div className={cn('bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex items-start justify-between', className)}>
+    <div className={cn('bg-surface p-5 rounded-[8px] border border-line flex items-start justify-between transition-colors', className)}>
       <div className="space-y-1">
-        <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{title}</p>
-        <p className="text-2xl font-bold text-slate-900 tracking-tight">{value}</p>
-        {subtitle && <p className="text-xs text-slate-500">{subtitle}</p>}
-        {trend && (
-          <p className={cn('text-xs font-medium flex items-center gap-1 mt-2', trend > 0 ? 'text-emerald-600' : 'text-rose-600')}>
-            {trend > 0 ? `+${trend}%` : `${trend}%`} vs previous cycle
+        <p className="text-[12.5px] font-medium text-fg-muted">{displayLabel}</p>
+        <p className="text-2xl font-semibold text-fg tracking-tight tabular-nums">{value}</p>
+        {subtitle && <p className="text-xs text-fg-muted mt-0.5">{subtitle}</p>}
+        {displayTrend !== undefined && (
+          <p className={cn('text-xs font-medium flex items-center gap-1 mt-1.5', displayTrend > 0 ? 'text-success' : 'text-danger')}>
+            {displayTrend > 0 ? `+${displayTrend}%` : `${displayTrend}%`} vs cycle
           </p>
         )}
       </div>
       {Icon && (
-        <div className="p-3 bg-indigo-50 text-indigo-600 rounded-lg">
-          <Icon className="w-5 h-5" />
+        <div className="p-2.5 bg-surface-2 text-fg-muted rounded-[6px] shrink-0 border border-line">
+          <Icon size={18} strokeWidth={1.75} />
         </div>
       )}
     </div>

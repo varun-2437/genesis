@@ -1,43 +1,53 @@
 import React from 'react'
 import { StatCard } from '@/components/shared/StatCard'
-import { Button, StatusBadge } from '@/components/ui'
-import { Users, Briefcase, Award, Send, Calendar } from 'lucide-react'
+import { Button } from '@/components/ui/Button'
+import { StatusBadge } from '@/components/ui/StatusBadge'
+import { Users, Briefcase, Award } from 'lucide-react'
 
 export function AlumniDashboardPage() {
   return (
-    <div className="space-y-8 max-w-6xl mx-auto">
-      <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-2xl p-8 text-white shadow-md flex items-center justify-between">
+    <div className="space-y-6">
+      {/* Page Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-line">
         <div>
-          <span className="text-xs uppercase font-bold text-indigo-300 tracking-wider">
-            Alumni Mentorship Network · Verified Member
-          </span>
-          <h2 className="text-2xl font-bold mt-2">Welcome, Rahul Venkat (Class of 2023)</h2>
-          <p className="text-slate-300 text-xs mt-1 max-w-xl">
-            Currently Software Development Engineer 2 at <strong>Microsoft India</strong>. Thank you for guiding current campus batches.
+          <h1 className="text-[22px] font-semibold text-fg tracking-tight">Alumni Network & Mentorship</h1>
+          <p className="text-xs text-fg-muted mt-0.5">
+            Rahul Venkat (Class of 2023) · Software Development Engineer 2, Microsoft India
           </p>
         </div>
-        <Button className="bg-white text-slate-900 hover:bg-slate-100 font-semibold text-xs border-none">
-          Post Internal Referral
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button variant="primary" size="sm">
+            Post Internal Referral
+          </Button>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <StatCard title="Active Mentees" value="4" subtitle="Final Year Students" icon={Users} />
-        <StatCard title="Referrals Posted" value="12" subtitle="3 Shortlisted" icon={Briefcase} />
-        <StatCard title="Mock Sessions Taken" value="8" subtitle="Average Rating: 4.9/5" icon={Award} />
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <StatCard label="Active Mentees" value="4" subtitle="Assigned students" icon={Users} />
+        <StatCard label="Referrals Posted" value="12" subtitle="3 currently shortlisted" icon={Briefcase} />
+        <StatCard label="Mock Interviews" value="8" subtitle="Average rating: 4.9/5" icon={Award} />
       </div>
 
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
-        <h3 className="font-bold text-slate-900 text-sm">Pending Student Mentorship Inquiries</h3>
-        <div className="space-y-3">
-          <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">
-            <div>
-              <p className="text-xs font-bold text-slate-900">Varun Murugesh (CSE 2026 Batch)</p>
-              <p className="text-[11px] text-slate-500">Requesting mock interview for Azure Cloud Engineer track</p>
+      {/* Mentorship Requests Card */}
+      <div className="card p-0 overflow-hidden">
+        <div className="p-4 border-b border-line flex items-center justify-between bg-surface-2/30">
+          <div>
+            <h2 className="text-[14px] font-semibold text-fg">Mentorship Inquiries</h2>
+            <p className="text-xs text-fg-muted mt-0.5">Undergraduate requests for career guidance and mock interviews</p>
+          </div>
+          <span className="text-xs text-fg-muted">1 pending inquiry</span>
+        </div>
+
+        <div className="p-4 divide-y divide-line text-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
+            <div className="space-y-0.5">
+              <span className="font-semibold text-fg text-sm">Varun Murugesh (CSE 2026 Batch)</span>
+              <p className="text-fg-muted">Requesting guidance session for Cloud Engineering / Systems track</p>
             </div>
-            <div className="flex gap-2">
-              <Button size="sm" variant="secondary" className="text-xs">Decline</Button>
-              <Button size="sm" className="text-xs">Accept & Schedule</Button>
+            <div className="flex items-center gap-2 shrink-0">
+              <Button variant="secondary" size="sm">Decline</Button>
+              <Button variant="primary" size="sm">Accept & Schedule</Button>
             </div>
           </div>
         </div>

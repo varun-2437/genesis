@@ -107,7 +107,7 @@ export function MySchedulePage() {
 
             <div className="self-end md:self-center shrink-0">
               {evt.category === 'INTERVIEW' ? (
-                <a href={evt.link} target="_blank" rel="noopener noreferrer">
+                <a href="/student/interview-room">
                   <Button size="sm" className="flex items-center gap-2 text-xs">
                     <Video className="w-4 h-4" /> Join Interview Room
                   </Button>

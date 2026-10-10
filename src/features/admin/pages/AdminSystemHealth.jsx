@@ -1,19 +1,13 @@
 import React, { useState } from 'react'
 import {
   Activity,
-  Server,
   Cpu,
   HardDrive,
   CheckCircle2,
-  AlertTriangle,
-  RefreshCw,
-  Clock,
-  Layers,
-  Database
+  Clock
 } from 'lucide-react'
 import { StatCard } from '@/components/shared/StatCard'
 import { StatusBadge } from '@/components/ui/StatusBadge'
-import { Button } from '@/components/ui/Button'
 
 const SYSTEM_SERVICES = [
   { name: 'Core Placement API Gateway', uptime: '99.98%', latency: '24ms', status: 'Operational' },
@@ -51,20 +45,17 @@ const ACTIVE_BACKGROUND_JOBS = [
 ]
 
 export function AdminSystemHealth() {
-  const [services, setServices] = useState(SYSTEM_SERVICES)
-  const [jobs, setJobs] = useState(ACTIVE_BACKGROUND_JOBS)
+  const [services] = useState(SYSTEM_SERVICES)
+  const [jobs] = useState(ACTIVE_BACKGROUND_JOBS)
 
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-2 border-b border-line">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700">Admin AD1 & AD8</span>
-            <h1 className="text-2xl font-bold text-slate-900">System Operations & Service Monitoring</h1>
-          </div>
-          <p className="text-sm text-slate-500 mt-1">
-            Real-time server availability (30.12), operational latency, background import/export jobs (30.3), and storage usage (30.6).
+          <h1 className="text-[22px] font-semibold text-fg tracking-tight">System Infrastructure & Operations</h1>
+          <p className="text-xs text-fg-muted mt-0.5">
+            Microservice health telemetry, background asynchronous task queues, and storage allocation.
           </p>
         </div>
       </div>
@@ -72,54 +63,50 @@ export function AdminSystemHealth() {
       {/* KPI Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
-          title="Overall Service Health"
-          value="100% Operational"
+          label="Cluster Status"
+          value="100% Uptime"
           icon={Activity}
-          change="All 5 microservices healthy"
-          trend="up"
+          subtitle="5 microservices healthy"
         />
         <StatCard
-          title="Average API Latency"
+          label="API Latency"
           value="28 ms"
           icon={Cpu}
-          change="-4ms optimization"
-          trend="up"
+          delta={-4}
         />
         <StatCard
-          title="Storage Consumption"
+          label="Storage Allocated"
           value="42.8 GB / 500 GB"
           icon={HardDrive}
-          change="8.5% capacity utilized"
-          trend="neutral"
+          subtitle="8.5% capacity consumed"
         />
         <StatCard
-          title="Background Tasks"
-          value="3 Tasks"
+          label="Background Tasks"
+          value="3 Active"
           icon={Clock}
-          change="0 failed queue retries"
-          trend="up"
+          subtitle="0 queue retries"
         />
       </div>
 
       {/* Service Health Cards */}
-      <div className="bg-white rounded-xl border border-slate-200/80 p-5 shadow-sm space-y-4">
+      <div className="card p-5 space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-bold text-slate-900">Microservice Availability & Health Check Matrix (30.12)</h3>
-          <span className="text-xs text-slate-400">Heartbeat: Every 15 seconds</span>
+          <h2 className="text-[14px] font-semibold text-fg">Service Availability Matrix</h2>
+          <span className="text-xs text-fg-muted">Heartbeat: 15s interval</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {services.map((srv, idx) => (
-            <div key={idx} className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
+            <div key={idx} className="p-3.5 rounded border border-line bg-surface-2/40 space-y-2 text-xs">
               <div className="flex items-center justify-between">
-                <span className="font-semibold text-xs text-slate-900">{srv.name}</span>
-                <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> Healthy
+                <span className="font-semibold text-fg">{srv.name}</span>
+                <span className="badge bg-success-soft text-success text-[11px]">
+                  <CheckCircle2 size={12} strokeWidth={1.75} /> Healthy
                 </span>
               </div>
-              <div className="flex items-center justify-between text-xs text-slate-500 pt-1 border-t border-slate-200/60">
-                <span>Uptime: <strong className="text-slate-700">{srv.uptime}</strong></span>
-                <span>Latency: <strong className="text-slate-700">{srv.latency}</strong></span>
+              <div className="flex items-center justify-between text-fg-muted pt-1 border-t border-line text-[11px]">
+                <span>Uptime: <strong className="text-fg tabular-nums">{srv.uptime}</strong></span>
+                <span>Latency: <strong className="text-fg tabular-nums">{srv.latency}</strong></span>
               </div>
             </div>
           ))}
@@ -127,29 +114,29 @@ export function AdminSystemHealth() {
       </div>
 
       {/* Background Jobs Monitor */}
-      <div className="bg-white rounded-xl border border-slate-200/80 shadow-sm overflow-hidden">
-        <div className="p-4 border-b border-slate-100 flex items-center justify-between">
-          <h3 className="text-sm font-bold text-slate-900">Import/Export & Background Worker Monitor (30.3)</h3>
-          <span className="text-xs text-slate-400">Celery / Worker Queues</span>
+      <div className="table-wrap">
+        <div className="p-3.5 border-b border-line flex items-center justify-between bg-surface-2/30">
+          <h2 className="text-[14px] font-semibold text-fg">Background Task Monitor</h2>
+          <span className="text-xs text-fg-muted">Asynchronous Worker Queue</span>
         </div>
-        <table className="w-full text-left text-sm text-slate-600">
-          <thead className="bg-slate-50 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200">
+        <table className="table">
+          <thead>
             <tr>
-              <th className="py-3 px-4">Task Identifier</th>
-              <th className="py-3 px-4">Operation Description</th>
-              <th className="py-3 px-4">Progress Vector</th>
-              <th className="py-3 px-4">Throughput</th>
-              <th className="py-3 px-4 text-right">State</th>
+              <th>Task Identifier</th>
+              <th>Task Name</th>
+              <th>Progress</th>
+              <th>Volume</th>
+              <th className="text-right">State</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 text-xs">
+          <tbody>
             {jobs.map((job) => (
-              <tr key={job.id} className="hover:bg-slate-50/50">
-                <td className="py-3.5 px-4 font-mono font-medium text-slate-500">{job.id}</td>
-                <td className="py-3.5 px-4 font-semibold text-slate-900">{job.task}</td>
-                <td className="py-3.5 px-4 font-medium text-indigo-600">{job.progress}</td>
-                <td className="py-3.5 px-4 text-slate-600">{job.recordsProcessed}</td>
-                <td className="py-3.5 px-4 text-right">
+              <tr key={job.id}>
+                <td className="font-mono text-fg-muted text-xs">{job.id}</td>
+                <td className="font-medium text-fg">{job.task}</td>
+                <td className="text-accent font-medium">{job.progress}</td>
+                <td className="text-fg-muted">{job.recordsProcessed}</td>
+                <td className="text-right">
                   <StatusBadge status={job.status} />
                 </td>
               </tr>

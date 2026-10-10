@@ -1,48 +1,56 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
 
-const STATUS_VARIANTS = {
+const STATUS_CONFIG = {
   // Application & General
-  APPLIED: 'bg-blue-50 text-blue-700 border-blue-200',
-  SHORTLISTED: 'bg-purple-50 text-purple-700 border-purple-200',
-  IN_REVIEW: 'bg-amber-50 text-amber-700 border-amber-200',
-  SELECTED: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-  REJECTED: 'bg-rose-50 text-rose-700 border-rose-200',
-  WITHDRAWN: 'bg-slate-50 text-slate-600 border-slate-200',
+  APPLIED: { bg: 'bg-info/10 text-info border-info/20', dot: 'bg-info' },
+  SHORTLISTED: { bg: 'bg-accent-soft text-accent border-accent/20', dot: 'bg-accent' },
+  IN_REVIEW: { bg: 'bg-warning-soft text-warning border-warning/20', dot: 'bg-warning' },
+  SELECTED: { bg: 'bg-success-soft text-success border-success/20', dot: 'bg-success' },
+  REJECTED: { bg: 'bg-danger-soft text-danger border-danger/20', dot: 'bg-danger' },
+  WITHDRAWN: { bg: 'bg-surface-2 text-fg-muted border-line', dot: 'bg-fg-subtle' },
+  
   // Verification
-  VERIFIED: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-  PENDING: 'bg-amber-50 text-amber-700 border-amber-200',
-  REQUIRES_UPDATE: 'bg-orange-50 text-orange-700 border-orange-200',
+  VERIFIED: { bg: 'bg-success-soft text-success border-success/20', dot: 'bg-success' },
+  PENDING: { bg: 'bg-warning-soft text-warning border-warning/20', dot: 'bg-warning' },
+  REQUIRES_UPDATE: { bg: 'bg-warning-soft text-warning border-warning/20', dot: 'bg-warning' },
+
   // Active/Upcoming
-  UPCOMING: 'bg-sky-50 text-sky-700 border-sky-200',
-  ONGOING: 'bg-indigo-50 text-indigo-700 border-indigo-200',
-  COMPLETED: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-  CANCELLED: 'bg-slate-100 text-slate-600 border-slate-300',
+  UPCOMING: { bg: 'bg-info/10 text-info border-info/20', dot: 'bg-info' },
+  ONGOING: { bg: 'bg-accent-soft text-accent border-accent/20', dot: 'bg-accent' },
+  COMPLETED: { bg: 'bg-success-soft text-success border-success/20', dot: 'bg-success' },
+  CANCELLED: { bg: 'bg-surface-2 text-fg-muted border-line', dot: 'bg-fg-subtle' },
+
   // Company Status
-  PROSPECT: 'bg-blue-50 text-blue-700 border-blue-200',
-  ACTIVE: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-  INACTIVE: 'bg-slate-100 text-slate-600 border-slate-200',
-  RESTRICTED: 'bg-rose-50 text-rose-700 border-rose-200',
+  PROSPECT: { bg: 'bg-info/10 text-info border-info/20', dot: 'bg-info' },
+  ACTIVE: { bg: 'bg-success-soft text-success border-success/20', dot: 'bg-success' },
+  INACTIVE: { bg: 'bg-surface-2 text-fg-muted border-line', dot: 'bg-fg-subtle' },
+  RESTRICTED: { bg: 'bg-danger-soft text-danger border-danger/20', dot: 'bg-danger' },
+
   // Job Status
-  DRAFT: 'bg-slate-100 text-slate-700 border-slate-200',
-  PENDING_APPROVAL: 'bg-amber-50 text-amber-700 border-amber-200',
-  PUBLISHED: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-  PAUSED: 'bg-amber-50 text-amber-700 border-amber-200',
-  CLOSED: 'bg-slate-100 text-slate-600 border-slate-300',
+  DRAFT: { bg: 'bg-surface-2 text-fg-muted border-line', dot: 'bg-fg-subtle' },
+  PENDING_APPROVAL: { bg: 'bg-warning-soft text-warning border-warning/20', dot: 'bg-warning' },
+  PUBLISHED: { bg: 'bg-success-soft text-success border-success/20', dot: 'bg-success' },
+  PAUSED: { bg: 'bg-warning-soft text-warning border-warning/20', dot: 'bg-warning' },
+  CLOSED: { bg: 'bg-surface-2 text-fg-muted border-line', dot: 'bg-fg-subtle' },
 }
 
 export function StatusBadge({ status, className }) {
-  const normalizedStatus = String(status).toUpperCase()
-  const variantClass = STATUS_VARIANTS[normalizedStatus] || 'bg-slate-100 text-slate-700 border-slate-200'
+  const normalizedStatus = String(status || '').toUpperCase()
+  const cfg = STATUS_CONFIG[normalizedStatus] || {
+    bg: 'bg-surface-2 text-fg-muted border-line',
+    dot: 'bg-fg-subtle',
+  }
 
   return (
     <span
       className={cn(
-        'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border',
-        variantClass,
+        'inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[12px] font-medium border tabular',
+        cfg.bg,
         className
       )}
     >
+      <span className={cn('w-1.5 h-1.5 rounded-full shrink-0', cfg.dot)} />
       {status}
     </span>
   )

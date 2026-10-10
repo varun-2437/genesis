@@ -66,6 +66,7 @@ import { PlacementEventsPage } from '@/features/student/pages/PlacementEventsPag
 import { PoliciesAnnouncementsPage } from '@/features/student/pages/PoliciesAnnouncementsPage'
 import { GrievanceFeedbackPage } from '@/features/student/pages/GrievanceFeedbackPage'
 import { MyApplicationsPage } from '@/features/student/pages/MyApplicationsPage'
+import { InterviewRoomPage } from '@/features/student/pages/InterviewRoomPage'
 
 // Alumni Pages (A1 - A6)
 import { AlumniDashboardPage } from '@/features/alumni/pages/AlumniDashboardPage'
@@ -172,6 +173,7 @@ export const router = createBrowserRouter([
       { path: 'student/events', element: <PlacementEventsPage /> },
       { path: 'student/policies', element: <PoliciesAnnouncementsPage /> },
       { path: 'student/grievance', element: <GrievanceFeedbackPage /> },
+      { path: 'student/interview-room', element: <InterviewRoomPage /> },
 
       // Alumni Portal (A1 - A6)
       { path: 'alumni/dashboard', element: <AlumniDashboardPage /> },
