@@ -12,7 +12,7 @@ import { NotificationCentrePage } from '@/features/shared/pages/NotificationCent
 import { MyAccountPrivacyPage } from '@/features/shared/pages/MyAccountPrivacyPage'
 import { NotFoundPage, UnauthorizedPage, ServerErrorPage } from '@/features/shared/pages/ErrorPages'
 
-// Student Pages (S1 - S19 Complete)
+// Student Pages (S1 - S19)
 import { StudentDashboard } from '@/features/student/pages/StudentDashboard'
 import { PlacementProfilePage } from '@/features/student/pages/PlacementProfilePage'
 import { MyResumesPage } from '@/features/student/pages/MyResumesPage'
@@ -33,7 +33,7 @@ import { PoliciesAnnouncementsPage } from '@/features/student/pages/PoliciesAnno
 import { GrievanceFeedbackPage } from '@/features/student/pages/GrievanceFeedbackPage'
 import { MyApplicationsPage } from '@/features/student/pages/MyApplicationsPage'
 
-// Alumni Pages (A1 - A6 Complete)
+// Alumni Pages (A1 - A6)
 import { AlumniDashboardPage } from '@/features/alumni/pages/AlumniDashboardPage'
 import { EmploymentProfilePage } from '@/features/alumni/pages/EmploymentProfilePage'
 import { MentorshipManagementPage } from '@/features/alumni/pages/MentorshipManagementPage'
@@ -41,11 +41,23 @@ import { ReferralsNetworkingPage } from '@/features/alumni/pages/ReferralsNetwor
 import { GuestLecturesSessionsPage } from '@/features/alumni/pages/GuestLecturesSessionsPage'
 import { RecruitmentConnectionsPage } from '@/features/alumni/pages/RecruitmentConnectionsPage'
 
-// TPO Ops (T26 Complete)
-import { TpoAlumniManagementPage } from '@/features/tpo/extended/pages/TpoAlumniManagementPage'
+// TPO Core Ops (T1 - T14 Complete)
 import { TpoDashboard } from '@/features/tpo/core/pages/TpoDashboard'
+import { TpoStudentsListPage } from '@/features/tpo/core/pages/TpoStudentsListPage'
+import { TpoStudentProfile360Page } from '@/features/tpo/core/pages/TpoStudentProfile360Page'
+import { TpoVerificationCentrePage } from '@/features/tpo/core/pages/TpoVerificationCentrePage'
+import { TpoCompaniesListPage } from '@/features/tpo/core/pages/TpoCompaniesListPage'
+import { TpoJobsListPage } from '@/features/tpo/core/pages/TpoJobsListPage'
+import { TpoDrivesManagementPage } from '@/features/tpo/core/pages/TpoDrivesManagementPage'
+import { TpoEligibilityRulesPage } from '@/features/tpo/core/pages/TpoEligibilityRulesPage'
+import { TpoApplicationsOpsPage } from '@/features/tpo/core/pages/TpoApplicationsOpsPage'
+import { TpoRoundsSelectionPage } from '@/features/tpo/core/pages/TpoRoundsSelectionPage'
+import { TpoInterviewSchedulerPage } from '@/features/tpo/core/pages/TpoInterviewSchedulerPage'
 
-// Reusable placeholder component for Dev 2 and Dev 3 pages
+// TPO Extended Ops (T26 Complete)
+import { TpoAlumniManagementPage } from '@/features/tpo/extended/pages/TpoAlumniManagementPage'
+
+// Reusable placeholder component for other pages
 function PagePlaceholder({ title, portal, devOwner }) {
   return (
     <div className="bg-white p-12 rounded-2xl border border-slate-200 text-center max-w-2xl mx-auto my-12 shadow-sm space-y-4">
@@ -89,7 +101,7 @@ export const router = createBrowserRouter([
       { path: 'notifications', element: <NotificationCentrePage /> },
       { path: 'account', element: <MyAccountPrivacyPage /> },
 
-      // Student Portal (Dev 1: All S1 - S19 Complete)
+      // Student Portal (S1 - S19)
       { path: 'student/dashboard', element: <StudentDashboard /> },
       { path: 'student/profile', element: <PlacementProfilePage /> },
       { path: 'student/resumes', element: <MyResumesPage /> },
@@ -110,7 +122,7 @@ export const router = createBrowserRouter([
       { path: 'student/policies', element: <PoliciesAnnouncementsPage /> },
       { path: 'student/grievance', element: <GrievanceFeedbackPage /> },
 
-      // Alumni Portal (Dev 1: All A1 - A6 Complete)
+      // Alumni Portal (A1 - A6)
       { path: 'alumni/dashboard', element: <AlumniDashboardPage /> },
       { path: 'alumni/profile', element: <EmploymentProfilePage /> },
       { path: 'alumni/mentorship', element: <MentorshipManagementPage /> },
@@ -118,13 +130,19 @@ export const router = createBrowserRouter([
       { path: 'alumni/lectures', element: <GuestLecturesSessionsPage /> },
       { path: 'alumni/stories', element: <RecruitmentConnectionsPage /> },
 
-      // TPO Portal (T26 built by Dev 1)
-      { path: 'tpo/alumni', element: <TpoAlumniManagementPage /> },
+      // TPO Portal Core (T1 - T14 Complete)
       { path: 'tpo/dashboard', element: <TpoDashboard /> },
-      { path: 'tpo/students', element: <PagePlaceholder title="T2: Students List & 360 View" portal="tpo" devOwner="Dev 2" /> },
-      { path: 'tpo/companies', element: <PagePlaceholder title="T5: Companies Onboarding & List" portal="tpo" devOwner="Dev 2" /> },
-      { path: 'tpo/drives', element: <PagePlaceholder title="T9: Drives List & Scheduling" portal="tpo" devOwner="Dev 2" /> },
-      { path: 'tpo/applications', element: <PagePlaceholder title="T12: Applications Management & Bulk Shortlist" portal="tpo" devOwner="Dev 2" /> },
+      { path: 'tpo/students', element: <TpoStudentsListPage /> },
+      { path: 'tpo/students/:studentId', element: <TpoStudentProfile360Page /> },
+      { path: 'tpo/verification', element: <TpoVerificationCentrePage /> },
+      { path: 'tpo/companies', element: <TpoCompaniesListPage /> },
+      { path: 'tpo/jobs', element: <TpoJobsListPage /> },
+      { path: 'tpo/drives', element: <TpoDrivesManagementPage /> },
+      { path: 'tpo/eligibility', element: <TpoEligibilityRulesPage /> },
+      { path: 'tpo/applications', element: <TpoApplicationsOpsPage /> },
+      { path: 'tpo/rounds', element: <TpoRoundsSelectionPage /> },
+      { path: 'tpo/scheduler', element: <TpoInterviewSchedulerPage /> },
+      { path: 'tpo/alumni', element: <TpoAlumniManagementPage /> },
       { path: 'tpo/reports', element: <PagePlaceholder title="T30: Reports, NAAC/NIRF & Analytics" portal="tpo" devOwner="Dev 3" /> },
 
       // Recruiter Portal (Dev 2)
