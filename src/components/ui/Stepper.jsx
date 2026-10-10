@@ -21,10 +21,10 @@ export function Stepper({ steps, currentStep, onStepClick, className }) {
             >
               <div
                 className={cn(
-                  'w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all shadow-sm',
-                  isCompleted && 'bg-indigo-600 text-white',
-                  isCurrent && 'bg-white border-2 border-indigo-600 text-indigo-600 ring-4 ring-indigo-50',
-                  !isCompleted && !isCurrent && 'bg-slate-100 border border-slate-300 text-slate-500'
+                  'w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all shadow-xs',
+                  isCompleted && 'bg-accent text-accent-fg',
+                  isCurrent && 'bg-surface border-2 border-accent text-accent ring-4 ring-accent-soft',
+                  !isCompleted && !isCurrent && 'bg-surface-2 border border-line text-fg-muted'
                 )}
               >
                 {isCompleted ? <Check className="w-4 h-4 stroke-[3]" /> : idx + 1}
@@ -33,13 +33,13 @@ export function Stepper({ steps, currentStep, onStepClick, className }) {
                 <p
                   className={cn(
                     'text-xs font-semibold',
-                    isCurrent ? 'text-indigo-600' : isCompleted ? 'text-slate-900' : 'text-slate-500'
+                    isCurrent ? 'text-accent' : isCompleted ? 'text-fg' : 'text-fg-muted'
                   )}
                 >
                   {step.title}
                 </p>
                 {step.description && (
-                  <p className="text-[11px] text-slate-400">{step.description}</p>
+                  <p className="text-[11px] text-fg-muted">{step.description}</p>
                 )}
               </div>
             </div>
@@ -48,7 +48,7 @@ export function Stepper({ steps, currentStep, onStepClick, className }) {
               <div
                 className={cn(
                   'flex-1 h-0.5 mx-4 transition-colors',
-                  idx < currentStep ? 'bg-indigo-600' : 'bg-slate-200'
+                  idx < currentStep ? 'bg-accent' : 'bg-line'
                 )}
               />
             )}

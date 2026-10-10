@@ -8,7 +8,7 @@ export const Select = React.forwardRef(
     return (
       <div className="w-full space-y-1.5">
         {label && (
-          <label htmlFor={selectId} className="block text-xs font-semibold text-slate-700">
+          <label htmlFor={selectId} className="block text-xs font-semibold text-fg">
             {label}
           </label>
         )}
@@ -16,25 +16,25 @@ export const Select = React.forwardRef(
           id={selectId}
           ref={ref}
           className={cn(
-            'w-full px-3 py-2 text-sm bg-white border rounded-lg transition-colors shadow-sm outline-none',
-            'text-slate-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500',
+            'w-full px-3 py-2 text-sm bg-surface border rounded-[6px] transition-colors outline-none',
+            'text-fg border-line-strong focus:border-accent',
             error
-              ? 'border-rose-400 focus:ring-rose-400 focus:border-rose-400'
-              : 'border-slate-300 hover:border-slate-400',
+              ? 'border-danger focus:border-danger'
+              : 'border-line-strong hover:border-fg-subtle',
             className
           )}
           {...props}
         >
           {options.length > 0
             ? options.map((opt) => (
-                <option key={opt.value} value={opt.value}>
+                <option key={opt.value} value={opt.value} className="bg-surface text-fg">
                   {opt.label}
                 </option>
               ))
             : children}
         </select>
-        {error && <p className="text-xs text-rose-600 font-medium">{error}</p>}
-        {helperText && !error && <p className="text-xs text-slate-500">{helperText}</p>}
+        {error && <p className="text-xs text-danger font-medium">{error}</p>}
+        {helperText && !error && <p className="text-xs text-fg-muted">{helperText}</p>}
       </div>
     )
   }

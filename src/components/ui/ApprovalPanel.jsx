@@ -13,14 +13,14 @@ export function ApprovalPanel({
   const [remarks, setRemarks] = useState('')
 
   return (
-    <div className={`p-5 bg-slate-50 border border-slate-200 rounded-xl space-y-4 ${className || ''}`}>
+    <div className={`p-5 card bg-surface-2/40 space-y-4 ${className || ''}`}>
       <div className="flex items-center gap-2">
-        <AlertCircle className="w-4 h-4 text-slate-500" />
-        <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700">{title}</h4>
+        <AlertCircle className="w-4 h-4 text-fg-muted" />
+        <h4 className="text-xs font-bold uppercase tracking-wider text-fg">{title}</h4>
       </div>
 
       <div>
-        <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+        <label className="block text-xs font-semibold text-fg-muted mb-1.5">
           Reviewer Remarks / Feedback (Optional)
         </label>
         <textarea
@@ -28,7 +28,7 @@ export function ApprovalPanel({
           value={remarks}
           onChange={(e) => setRemarks(e.target.value)}
           placeholder="Add reason for approval, rejection, or required corrections..."
-          className="w-full text-xs p-3 bg-white border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-slate-800"
+          className="w-full text-xs p-3 bg-surface border border-line-strong rounded-[6px] outline-none focus:border-accent text-fg"
         />
       </div>
 
@@ -57,7 +57,7 @@ export function ApprovalPanel({
           variant="primary"
           disabled={loading}
           onClick={() => onApprove(remarks)}
-          className="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 focus:ring-emerald-500"
+          className="flex items-center gap-1.5"
         >
           <CheckCircle className="w-4 h-4" /> Approve
         </Button>

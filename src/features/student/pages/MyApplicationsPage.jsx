@@ -69,11 +69,13 @@ export function MyApplicationsPage() {
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
       {/* Header */}
-      <div>
-        <h2 className="text-2xl font-bold text-slate-900">My Applications Tracker</h2>
-        <p className="text-xs text-slate-500 mt-1">
-          Monitor your application lifecycle, round-wise evaluation status, and drive schedules.
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-line">
+        <div>
+          <h1 className="text-[22px] font-semibold text-fg tracking-tight">My Applications Tracker</h1>
+          <p className="text-xs text-fg-muted mt-0.5">
+            Monitor your application lifecycle, round-wise evaluation status, and drive schedules.
+          </p>
+        </div>
       </div>
 
       {/* Applications Cards */}
@@ -81,25 +83,25 @@ export function MyApplicationsPage() {
         {applications.map((app) => (
           <div
             key={app.id}
-            className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6"
+            className="card flex flex-col md:flex-row md:items-center justify-between gap-6 hover:border-line-strong transition-colors"
           >
             <div className="space-y-2 flex-1">
               <div className="flex items-center gap-3">
-                <h3 className="text-base font-bold text-slate-900">{app.company}</h3>
+                <h3 className="text-[15px] font-semibold text-fg">{app.company}</h3>
                 <StatusBadge status={app.status} />
               </div>
-              <p className="text-xs font-semibold text-slate-700">
-                {app.role} · <span className="text-indigo-600 font-bold">{app.ctc}</span>
+              <p className="text-xs font-medium text-fg-muted">
+                {app.role} · <span className="text-accent font-semibold tabular-nums">{app.ctc}</span>
               </p>
               
-              <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 pt-2 border-t border-slate-100">
+              <div className="flex flex-wrap items-center gap-4 text-xs text-fg-muted pt-2 border-t border-line">
                 <span className="flex items-center gap-1">
-                  <Calendar className="w-3.5 h-3.5 text-slate-400" /> Applied: {app.appliedOn}
+                  <Calendar className="w-3.5 h-3.5 text-fg-subtle" /> Applied: {app.appliedOn}
                 </span>
-                <span className="flex items-center gap-1 font-medium text-slate-700">
-                  <Clock className="w-3.5 h-3.5 text-indigo-500" /> {app.currentRound}
+                <span className="flex items-center gap-1 font-medium text-fg">
+                  <Clock className="w-3.5 h-3.5 text-accent" /> {app.currentRound}
                 </span>
-                <span className="text-slate-400">({app.scheduledAt})</span>
+                <span className="text-fg-muted">({app.scheduledAt})</span>
               </div>
             </div>
 
@@ -109,13 +111,13 @@ export function MyApplicationsPage() {
                   variant="ghost"
                   size="sm"
                   onClick={() => setWithdrawModal({ open: true, app })}
-                  className="text-xs text-rose-600 hover:bg-rose-50 hover:text-rose-700"
+                  className="text-xs text-danger hover:bg-danger-soft"
                 >
                   Withdraw Application
                 </Button>
               )}
               {app.status === 'SELECTED' && (
-                <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-xs">
+                <Button size="sm" className="text-xs">
                   View Offer
                 </Button>
               )}
@@ -141,11 +143,11 @@ export function MyApplicationsPage() {
           </>
         }
       >
-        <div className="space-y-2 text-xs text-slate-600">
+        <div className="space-y-2 text-xs text-fg-muted">
           <p>
-            Are you sure you want to withdraw your application for <strong>{withdrawModal.app?.company}</strong>?
+            Are you sure you want to withdraw your application for <strong className="text-fg font-semibold">{withdrawModal.app?.company}</strong>?
           </p>
-          <p className="text-rose-600 font-medium">
+          <p className="text-danger font-medium">
             Note: As per placement rules, you will not be permitted to re-apply for this drive cycle once withdrawn.
           </p>
         </div>

@@ -86,10 +86,10 @@ export function JobBrowsePage() {
   return (
     <div className="space-y-6 max-w-7xl mx-auto">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-line">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">Campus Jobs & Opportunities</h2>
-          <p className="text-xs text-slate-500 mt-1">
+          <h1 className="text-[22px] font-semibold text-fg tracking-tight">Campus Jobs & Opportunities</h1>
+          <p className="text-xs text-fg-muted mt-0.5">
             Browse verified company job profiles, live eligibility evaluation, and drive deadlines.
           </p>
         </div>
@@ -107,15 +107,15 @@ export function JobBrowsePage() {
       />
 
       {/* Filter and Search Bar */}
-      <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="card p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-surface-2/40">
         <div className="relative flex-1 max-w-md">
-          <Search className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
+          <Search className="w-4 h-4 absolute left-3 top-2.5 text-fg-subtle" />
           <input
             type="text"
             placeholder="Search by role, company name, or tech..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500 text-slate-800"
+            className="w-full pl-9 pr-4 py-1.5 text-xs bg-surface border border-line-strong rounded-[6px] outline-none focus:border-accent text-fg placeholder:text-fg-subtle"
           />
         </div>
 
@@ -123,7 +123,7 @@ export function JobBrowsePage() {
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="text-xs bg-slate-50 border border-slate-200 text-slate-700 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500"
+            className="text-xs bg-surface border border-line-strong text-fg rounded-[6px] px-3 py-1.5 outline-none focus:border-accent cursor-pointer"
           >
             <option value="ALL">All Categories</option>
             <option value="Super Dream">Super Dream (&gt;15 LPA)</option>
@@ -133,51 +133,51 @@ export function JobBrowsePage() {
       </div>
 
       {/* Job Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {filteredJobs.map((job) => (
           <div
             key={job.id}
-            className="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-between shadow-sm hover:border-indigo-300 transition-all"
+            className="card flex flex-col justify-between hover:border-line-strong transition-colors"
           >
             <div className="space-y-4">
               <div className="flex items-start justify-between gap-2">
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-accent bg-accent-soft px-2 py-0.5 rounded-[4px]">
                     {job.category}
                   </span>
-                  <h3 className="text-base font-bold text-slate-900 mt-2">{job.title}</h3>
-                  <p className="text-xs font-semibold text-slate-600 flex items-center gap-1.5 mt-0.5">
-                    <Building2 className="w-3.5 h-3.5 text-slate-400" /> {job.company}
+                  <h3 className="text-[15px] font-semibold text-fg mt-2">{job.title}</h3>
+                  <p className="text-xs font-medium text-fg-muted flex items-center gap-1.5 mt-0.5">
+                    <Building2 className="w-3.5 h-3.5 text-fg-subtle" /> {job.company}
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-extrabold text-slate-900">{job.ctc}</p>
-                  <p className="text-[11px] text-slate-400">{job.type}</p>
+                  <p className="text-sm font-bold text-fg tabular-nums">{job.ctc}</p>
+                  <p className="text-[11px] text-fg-muted">{job.type}</p>
                 </div>
               </div>
 
-              <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+              <p className="text-xs text-fg-muted line-clamp-2 leading-relaxed">
                 {job.description}
               </p>
 
-              <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 pt-2 border-t border-slate-100">
+              <div className="flex flex-wrap items-center gap-3 text-xs text-fg-muted pt-2 border-t border-line">
                 <span className="flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5 text-slate-400" /> {job.location}
+                  <MapPin className="w-3.5 h-3.5 text-fg-subtle" /> {job.location}
                 </span>
                 <span className="flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5 text-amber-500" /> Deadline: {job.deadline}
+                  <Clock className="w-3.5 h-3.5 text-warning" /> Deadline: {job.deadline}
                 </span>
               </div>
             </div>
 
             {/* Eligibility & CTA */}
-            <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div className="mt-5 pt-3 border-t border-line flex items-center justify-between gap-3">
               {job.eligibility.eligible ? (
-                <span className="text-xs font-semibold text-emerald-600 flex items-center gap-1">
+                <span className="text-xs font-medium text-success flex items-center gap-1">
                   <CheckCircle2 className="w-4 h-4" /> Eligible to Apply
                 </span>
               ) : (
-                <span className="text-xs font-semibold text-rose-600 flex items-center gap-1" title={job.eligibility.reasons.join(', ')}>
+                <span className="text-xs font-medium text-danger flex items-center gap-1" title={job.eligibility.reasons.join(', ')}>
                   <XCircle className="w-4 h-4" /> Ineligible (CGPA &lt; 9.0)
                 </span>
               )}

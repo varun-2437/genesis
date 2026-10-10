@@ -54,25 +54,25 @@ export function PlacementDrivesPage() {
   return (
     <div className="space-y-6 max-w-6xl mx-auto">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-line">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">Campus Placement Drives</h2>
-          <p className="text-xs text-slate-500 mt-1">
+          <h1 className="text-[22px] font-semibold text-fg tracking-tight">Campus Placement Drives</h1>
+          <p className="text-xs text-fg-muted mt-0.5">
             Schedule, pre-placement talks (PPT), logistics, and attendance tracking for official campus recruitment drives.
           </p>
         </div>
-        <div className="px-4 py-2 bg-indigo-50 border border-indigo-200 rounded-xl text-xs font-semibold text-indigo-900 flex items-center gap-2">
-          <span>Active Drive Application Limit (6.9):</span>
-          <span className="px-2 py-0.5 bg-indigo-600 text-white rounded-md text-[11px]">2 / 5 Used</span>
+        <div className="px-3 py-1.5 bg-surface-2 border border-line rounded-[6px] text-xs font-medium text-fg flex items-center gap-2">
+          <span className="text-fg-muted">Active Drive Limit (6.9):</span>
+          <span className="px-2 py-0.5 bg-accent text-accent-fg rounded text-[11px] font-medium">2 / 5 Used</span>
         </div>
       </div>
 
       {/* Policy Reminder */}
-      <div className="p-4 bg-indigo-50 border border-indigo-200 rounded-xl flex items-center justify-between flex-wrap gap-3">
+      <div className="card p-4 bg-surface-2/40 flex items-center justify-between flex-wrap gap-3">
         <div className="flex items-center gap-3">
-          <Megaphone className="w-5 h-5 text-indigo-700" />
-          <p className="text-xs text-indigo-950 font-medium">
-            <strong>Mandatory Drive Attendance Rule (M6.12):</strong> Registering for a drive commits you to attend the Pre-Placement Talk (PPT). Unexcused absences risk drive de-registration.
+          <Megaphone className="w-5 h-5 text-accent shrink-0" />
+          <p className="text-xs text-fg leading-relaxed">
+            <strong className="font-semibold text-fg">Mandatory Drive Attendance Rule (M6.12):</strong> Registering for a drive commits you to attend the Pre-Placement Talk (PPT). Unexcused absences risk drive de-registration.
           </p>
         </div>
       </div>
@@ -94,37 +94,37 @@ export function PlacementDrivesPage() {
             return (
               <div
                 key={drive.id}
-                className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6"
+                className="card flex flex-col md:flex-row md:items-center justify-between gap-6 hover:border-line-strong transition-colors"
               >
                 <div className="space-y-2 flex-1">
                   <div className="flex items-center gap-3">
-                    <h3 className="text-lg font-bold text-slate-900">{drive.company}</h3>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700">
+                    <h3 className="text-[15px] font-semibold text-fg">{drive.company}</h3>
+                    <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-surface-2 text-fg-muted border border-line">
                       {drive.type}
                     </span>
                     <StatusBadge status={drive.status} />
                   </div>
 
-                  <p className="text-xs font-semibold text-indigo-600">{drive.rolesOffered}</p>
+                  <p className="text-xs font-medium text-accent">{drive.rolesOffered}</p>
                   
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 text-xs text-slate-600">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 text-xs text-fg-muted">
                     <div className="flex items-center gap-1.5">
-                      <Calendar className="w-4 h-4 text-slate-400" /> Dates: <strong>{drive.dates}</strong>
+                      <Calendar className="w-4 h-4 text-fg-subtle" /> Dates: <strong className="text-fg font-medium">{drive.dates}</strong>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <Clock className="w-4 h-4 text-slate-400" /> PPT Slot: <strong>{drive.pptSlot}</strong>
+                      <Clock className="w-4 h-4 text-fg-subtle" /> PPT Slot: <strong className="text-fg font-medium">{drive.pptSlot}</strong>
                     </div>
                   </div>
 
-                  <p className="text-[11px] text-slate-500 pt-1">
-                    Eligibility Rule: <span className="font-semibold text-slate-700">{drive.eligibility}</span>
+                  <p className="text-[11px] text-fg-muted pt-1">
+                    Eligibility Rule: <span className="font-medium text-fg">{drive.eligibility}</span>
                   </p>
                 </div>
 
                 <div className="flex flex-col items-end gap-2 shrink-0">
                   {drive.status === 'UPCOMING' ? (
                     isRegistered ? (
-                      <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 flex items-center gap-1.5">
+                      <span className="text-xs font-medium text-success bg-success-soft px-3 py-1.5 rounded-[6px] border border-success/20 flex items-center gap-1.5">
                         <CheckCircle2 className="w-4 h-4" /> Registered for Drive
                       </span>
                     ) : (
@@ -164,12 +164,12 @@ export function PlacementDrivesPage() {
           </>
         }
       >
-        <div className="space-y-3 text-xs text-slate-600">
+        <div className="space-y-3 text-xs text-fg-muted">
           <p>Provide anonymous feedback to the TPO regarding test difficulty, interview fairness, and process quality.</p>
           <textarea
             rows={4}
             placeholder="Share insights on questions asked, interviewer behavior, and logistics..."
-            className="w-full p-3 bg-white border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full p-3 bg-surface border border-line-strong rounded-[6px] outline-none focus:border-accent text-fg"
           />
         </div>
       </Modal>

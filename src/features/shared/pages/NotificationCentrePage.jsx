@@ -64,12 +64,12 @@ export function NotificationCentrePage() {
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-line">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-2.5">
-            <Bell className="w-6 h-6 text-indigo-600" /> Notification Centre
-          </h2>
-          <p className="text-xs text-slate-500 mt-1">
+          <h1 className="text-[22px] font-semibold text-fg tracking-tight flex items-center gap-2">
+            <Bell className="w-5 h-5 text-accent" /> Notification Centre
+          </h1>
+          <p className="text-xs text-fg-muted mt-0.5">
             Centralized inbox for placement alerts, circulars, drive announcements, and action items.
           </p>
         </div>
@@ -96,46 +96,46 @@ export function NotificationCentrePage() {
             <div
               key={item.id}
               onClick={() => markSingleRead(item.id)}
-              className={`p-4 rounded-xl border transition-all cursor-pointer flex items-start gap-4 ${
+              className={`p-4 rounded-[8px] border transition-colors cursor-pointer flex items-start gap-4 ${
                 item.unread
-                  ? 'bg-white border-indigo-200 shadow-sm'
-                  : 'bg-slate-50/70 border-slate-200 opacity-80'
+                  ? 'bg-surface border-line-strong shadow-xs'
+                  : 'bg-surface-2/50 border-line opacity-85'
               }`}
             >
               <div
-                className={`p-2.5 rounded-xl shrink-0 ${
+                className={`p-2 rounded-[6px] shrink-0 ${
                   item.type === 'ACTION_REQUIRED'
-                    ? 'bg-rose-50 text-rose-600'
+                    ? 'bg-danger/10 text-danger'
                     : item.type === 'ANNOUNCEMENT'
-                    ? 'bg-indigo-50 text-indigo-600'
-                    : 'bg-emerald-50 text-emerald-600'
+                    ? 'bg-accent-soft text-accent'
+                    : 'bg-info/10 text-info'
                 }`}
               >
                 {item.type === 'ACTION_REQUIRED' ? (
-                  <AlertCircle className="w-5 h-5" />
+                  <AlertCircle className="w-4 h-4" />
                 ) : item.type === 'ANNOUNCEMENT' ? (
-                  <Megaphone className="w-5 h-5" />
+                  <Megaphone className="w-4 h-4" />
                 ) : (
-                  <Info className="w-5 h-5" />
+                  <Info className="w-4 h-4" />
                 )}
               </div>
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between gap-2">
-                  <h4 className={`text-sm ${item.unread ? 'font-bold text-slate-900' : 'font-medium text-slate-700'}`}>
+                  <h4 className={`text-sm ${item.unread ? 'font-semibold text-fg' : 'font-medium text-fg-muted'}`}>
                     {item.title}
                   </h4>
-                  <span className="text-[11px] text-slate-400 shrink-0 flex items-center gap-1">
-                    <Calendar className="w-3 h-3" /> {item.date}
+                  <span className="text-[11px] text-fg-muted shrink-0 flex items-center gap-1">
+                    <Calendar className="w-3 h-3 text-fg-subtle" /> {item.date}
                   </span>
                 </div>
-                <p className="text-xs text-slate-600 mt-1 leading-relaxed">{item.message}</p>
-                <div className="flex items-center justify-between mt-3 pt-2 border-t border-slate-100">
+                <p className="text-xs text-fg-muted mt-1 leading-relaxed">{item.message}</p>
+                <div className="flex items-center justify-between mt-3 pt-2 border-t border-line">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 bg-slate-100 px-2 py-0.5 rounded">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-fg-muted bg-surface-2 px-2 py-0.5 rounded-[4px] border border-line">
                       {item.category}
                     </span>
-                    <span className="text-[10px] text-slate-400">
+                    <span className="text-[10px] text-fg-muted">
                       Delivered · {item.unread ? 'Unread' : 'Read & Logged'}
                     </span>
                   </div>
@@ -157,7 +157,7 @@ export function NotificationCentrePage() {
             </div>
           ))
         ) : (
-          <div className="p-12 text-center text-slate-400 text-xs bg-white rounded-xl border border-slate-200">
+          <div className="card p-12 text-center text-fg-muted text-xs">
             No notifications in this view.
           </div>
         )}

@@ -12,7 +12,7 @@ export function ThemeProvider({ children }) {
     if (typeof window !== 'undefined') {
       const stored = localStorage.getItem('placehub_theme')
       if (stored) return stored
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+      return 'light'
     }
     return 'light'
   })
