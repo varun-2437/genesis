@@ -12,28 +12,40 @@ import { NotificationCentrePage } from '@/features/shared/pages/NotificationCent
 import { MyAccountPrivacyPage } from '@/features/shared/pages/MyAccountPrivacyPage'
 import { NotFoundPage, UnauthorizedPage, ServerErrorPage } from '@/features/shared/pages/ErrorPages'
 
-// Core Student Pages (Phase 3: S1, S2, S3, S5, S6, S7, S13)
+// Student Pages (S1 - S19 Complete)
 import { StudentDashboard } from '@/features/student/pages/StudentDashboard'
 import { PlacementProfilePage } from '@/features/student/pages/PlacementProfilePage'
 import { MyResumesPage } from '@/features/student/pages/MyResumesPage'
+import { MyDocumentsPage } from '@/features/student/pages/MyDocumentsPage'
 import { JobBrowsePage } from '@/features/student/pages/JobBrowsePage'
 import { JobDetailPage } from '@/features/student/pages/JobDetailPage'
-import { MyApplicationsPage } from '@/features/student/pages/MyApplicationsPage'
-import { MyOffersJoiningPage } from '@/features/student/pages/MyOffersJoiningPage'
-
-// Phase 4 Student Pages (S4, S8, S9, S10, S11, S14, S18)
-import { MyDocumentsPage } from '@/features/student/pages/MyDocumentsPage'
 import { PlacementDrivesPage } from '@/features/student/pages/PlacementDrivesPage'
 import { MySchedulePage } from '@/features/student/pages/MySchedulePage'
 import { AssessmentsPage } from '@/features/student/pages/AssessmentsPage'
 import { TrainingPage } from '@/features/student/pages/TrainingPage'
+import { MyInternshipsPage } from '@/features/student/pages/MyInternshipsPage'
+import { MyOffersJoiningPage } from '@/features/student/pages/MyOffersJoiningPage'
 import { AiPlacementAssistantPage } from '@/features/student/pages/AiPlacementAssistantPage'
+import { CareerGuidancePage } from '@/features/student/pages/CareerGuidancePage'
+import { AlumniConnectPage } from '@/features/student/pages/AlumniConnectPage'
+import { PlacementEventsPage } from '@/features/student/pages/PlacementEventsPage'
 import { PoliciesAnnouncementsPage } from '@/features/student/pages/PoliciesAnnouncementsPage'
+import { GrievanceFeedbackPage } from '@/features/student/pages/GrievanceFeedbackPage'
+import { MyApplicationsPage } from '@/features/student/pages/MyApplicationsPage'
 
-// TPO Dashboards
+// Alumni Pages (A1 - A6 Complete)
+import { AlumniDashboardPage } from '@/features/alumni/pages/AlumniDashboardPage'
+import { EmploymentProfilePage } from '@/features/alumni/pages/EmploymentProfilePage'
+import { MentorshipManagementPage } from '@/features/alumni/pages/MentorshipManagementPage'
+import { ReferralsNetworkingPage } from '@/features/alumni/pages/ReferralsNetworkingPage'
+import { GuestLecturesSessionsPage } from '@/features/alumni/pages/GuestLecturesSessionsPage'
+import { RecruitmentConnectionsPage } from '@/features/alumni/pages/RecruitmentConnectionsPage'
+
+// TPO Ops (T26 Complete)
+import { TpoAlumniManagementPage } from '@/features/tpo/extended/pages/TpoAlumniManagementPage'
 import { TpoDashboard } from '@/features/tpo/core/pages/TpoDashboard'
 
-// Reusable placeholder component for other pages
+// Reusable placeholder component for Dev 2 and Dev 3 pages
 function PagePlaceholder({ title, portal, devOwner }) {
   return (
     <div className="bg-white p-12 rounded-2xl border border-slate-200 text-center max-w-2xl mx-auto my-12 shadow-sm space-y-4">
@@ -77,30 +89,37 @@ export const router = createBrowserRouter([
       { path: 'notifications', element: <NotificationCentrePage /> },
       { path: 'account', element: <MyAccountPrivacyPage /> },
 
-      // Student Portal (Phase 3 + Phase 4 Complete)
+      // Student Portal (Dev 1: All S1 - S19 Complete)
       { path: 'student/dashboard', element: <StudentDashboard /> },
       { path: 'student/profile', element: <PlacementProfilePage /> },
       { path: 'student/resumes', element: <MyResumesPage /> },
       { path: 'student/documents', element: <MyDocumentsPage /> },
       { path: 'student/jobs', element: <JobBrowsePage /> },
       { path: 'student/jobs/:jobId', element: <JobDetailPage /> },
+      { path: 'student/applications', element: <MyApplicationsPage /> },
       { path: 'student/drives', element: <PlacementDrivesPage /> },
       { path: 'student/schedule', element: <MySchedulePage /> },
       { path: 'student/assessments', element: <AssessmentsPage /> },
       { path: 'student/training', element: <TrainingPage /> },
-      { path: 'student/applications', element: <MyApplicationsPage /> },
+      { path: 'student/internships', element: <MyInternshipsPage /> },
       { path: 'student/offers', element: <MyOffersJoiningPage /> },
       { path: 'student/ai-assistant', element: <AiPlacementAssistantPage /> },
+      { path: 'student/guidance', element: <CareerGuidancePage /> },
+      { path: 'student/alumni-connect', element: <AlumniConnectPage /> },
+      { path: 'student/events', element: <PlacementEventsPage /> },
       { path: 'student/policies', element: <PoliciesAnnouncementsPage /> },
+      { path: 'student/grievance', element: <GrievanceFeedbackPage /> },
 
-      // S12, S15, S16, S17, S19 mapped to Phase 5
-      { path: 'student/internships', element: <PagePlaceholder title="S12: My Internships Tracker" portal="student" devOwner="Dev 1" /> },
-      { path: 'student/guidance', element: <PagePlaceholder title="S15: Career Guidance & Counselling" portal="student" devOwner="Dev 1" /> },
-      { path: 'student/alumni-connect', element: <PagePlaceholder title="S16: Alumni Connect & Mentorship" portal="student" devOwner="Dev 1" /> },
-      { path: 'student/events', element: <PagePlaceholder title="S17: Placement Events & Seminars" portal="student" devOwner="Dev 1" /> },
-      { path: 'student/grievance', element: <PagePlaceholder title="S19: Grievance & Student Feedback" portal="student" devOwner="Dev 1" /> },
+      // Alumni Portal (Dev 1: All A1 - A6 Complete)
+      { path: 'alumni/dashboard', element: <AlumniDashboardPage /> },
+      { path: 'alumni/profile', element: <EmploymentProfilePage /> },
+      { path: 'alumni/mentorship', element: <MentorshipManagementPage /> },
+      { path: 'alumni/referrals', element: <ReferralsNetworkingPage /> },
+      { path: 'alumni/lectures', element: <GuestLecturesSessionsPage /> },
+      { path: 'alumni/stories', element: <RecruitmentConnectionsPage /> },
 
-      // TPO Portal (Dev 2 Core + Dev 3 Extended)
+      // TPO Portal (T26 built by Dev 1)
+      { path: 'tpo/alumni', element: <TpoAlumniManagementPage /> },
       { path: 'tpo/dashboard', element: <TpoDashboard /> },
       { path: 'tpo/students', element: <PagePlaceholder title="T2: Students List & 360 View" portal="tpo" devOwner="Dev 2" /> },
       { path: 'tpo/companies', element: <PagePlaceholder title="T5: Companies Onboarding & List" portal="tpo" devOwner="Dev 2" /> },
@@ -123,11 +142,6 @@ export const router = createBrowserRouter([
       { path: 'management/dashboard', element: <PagePlaceholder title="M1: Institution-wide Placement Metrics" portal="management" devOwner="Dev 3" /> },
       { path: 'management/departments', element: <PagePlaceholder title="M2: Department & Program Comparison" portal="management" devOwner="Dev 3" /> },
       { path: 'management/accreditation', element: <PagePlaceholder title="M6: Accreditation Reports (NIRF / NBA)" portal="management" devOwner="Dev 3" /> },
-
-      // Alumni Portal (Dev 1)
-      { path: 'alumni/dashboard', element: <PagePlaceholder title="A1: Alumni Dashboard & Network" portal="alumni" devOwner="Dev 1" /> },
-      { path: 'alumni/mentorship', element: <PagePlaceholder title="A3: Mentorship Requests & Sessions" portal="alumni" devOwner="Dev 1" /> },
-      { path: 'alumni/referrals', element: <PagePlaceholder title="A4: Job Referrals & Openings" portal="alumni" devOwner="Dev 1" /> },
 
       // Admin Portal (Dev 3)
       { path: 'admin/dashboard', element: <PagePlaceholder title="AD1: System Health & Monitoring" portal="admin" devOwner="Dev 3" /> },
