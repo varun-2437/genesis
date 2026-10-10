@@ -55,10 +55,10 @@ export function TrainingPage() {
   return (
     <div className="space-y-6 max-w-6xl mx-auto">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-line">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">Placement Preparation & Training Hub</h2>
-          <p className="text-xs text-slate-500 mt-1">
+          <h1 className="text-[22px] font-semibold text-fg tracking-tight">Placement Preparation & Training Hub</h1>
+          <p className="text-xs text-fg-muted mt-0.5">
             Skill development programmes, corporate bootcamps, mock interview scheduling, and training certifications.
           </p>
         </div>
@@ -74,27 +74,27 @@ export function TrainingPage() {
           return (
             <div
               key={p.id}
-              className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6"
+              className="card flex flex-col md:flex-row md:items-center justify-between gap-6 hover:border-line-strong transition-colors"
             >
               <div className="space-y-2 flex-1">
                 <div className="flex items-center gap-3">
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-indigo-50 text-indigo-700">
+                  <span className="text-[10px] font-semibold px-2 py-0.5 rounded bg-accent-soft text-accent border border-accent/20">
                     {p.category}
                   </span>
-                  <h3 className="text-base font-bold text-slate-900">{p.title}</h3>
+                  <h3 className="text-[15px] font-semibold text-fg">{p.title}</h3>
                   <StatusBadge status={p.status} />
                 </div>
 
-                <p className="text-xs font-semibold text-slate-700">
-                  Trainer: <span className="text-indigo-600">{p.trainer}</span> · {p.batch}
+                <p className="text-xs font-medium text-fg-muted">
+                  Trainer: <span className="text-accent">{p.trainer}</span> · {p.batch}
                 </p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-500 pt-2 border-t border-slate-100">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-fg-muted pt-2 border-t border-line">
                   <div className="flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-slate-400" /> Schedule: <strong>{p.dates}</strong>
+                    <Calendar className="w-3.5 h-3.5 text-fg-subtle" /> Schedule: <strong className="text-fg font-medium">{p.dates}</strong>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Attendance: <strong>{p.attendance}</strong>
+                    <CheckCircle2 className="w-3.5 h-3.5 text-success" /> Attendance: <strong className="text-fg font-medium">{p.attendance}</strong>
                   </div>
                 </div>
               </div>
@@ -104,7 +104,7 @@ export function TrainingPage() {
                   <Button
                     size="sm"
                     variant="secondary"
-                    className="text-xs text-emerald-700 bg-emerald-50 border-emerald-200 hover:bg-emerald-100 flex items-center gap-1.5"
+                    className="text-xs text-success flex items-center gap-1.5"
                     onClick={() => alert(`Downloading Certificate for ${p.title}`)}
                   >
                     <Award className="w-3.5 h-3.5" /> Download Certificate
@@ -141,10 +141,10 @@ export function TrainingPage() {
           </>
         }
       >
-        <div className="space-y-4 text-xs text-slate-600">
+        <div className="space-y-4 text-xs text-fg-muted">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Select Interview Track</label>
-            <select className="w-full text-xs p-2.5 bg-white border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-indigo-500">
+            <label className="block text-xs font-semibold text-fg mb-1">Select Interview Track</label>
+            <select className="w-full text-xs p-2.5 bg-surface border border-line-strong rounded-[6px] outline-none focus:border-accent text-fg">
               <option>Technical DSA & Architecture (Alumni Panel)</option>
               <option>Cloud & DevOps System Design</option>
               <option>HR & Leadership Competency Evaluation</option>
@@ -152,8 +152,8 @@ export function TrainingPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Preferred Time Window</label>
-            <select className="w-full text-xs p-2.5 bg-white border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-indigo-500">
+            <label className="block text-xs font-semibold text-fg mb-1">Preferred Time Window</label>
+            <select className="w-full text-xs p-2.5 bg-surface border border-line-strong rounded-[6px] outline-none focus:border-accent text-fg">
               <option>Saturday (Oct 17) · 04:00 PM – 05:00 PM IST</option>
               <option>Sunday (Oct 18) · 11:00 AM – 12:00 PM IST</option>
               <option>Tuesday (Oct 20) · 06:00 PM – 07:00 PM IST</option>

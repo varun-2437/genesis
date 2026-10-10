@@ -39,11 +39,13 @@ export function PlacementEventsPage() {
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
-      <div>
-        <h2 className="text-2xl font-bold text-slate-900">Placement Seminars & Campus Events</h2>
-        <p className="text-xs text-slate-500 mt-1">
-          Industry tech talks, career orientation conferences, and corporate speaker series.
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-line">
+        <div>
+          <h1 className="text-[22px] font-semibold text-fg tracking-tight">Placement Seminars & Campus Events</h1>
+          <p className="text-xs text-fg-muted mt-0.5">
+            Industry tech talks, career orientation conferences, and corporate speaker series.
+          </p>
+        </div>
       </div>
 
       <div className="space-y-4">
@@ -52,24 +54,24 @@ export function PlacementEventsPage() {
           return (
             <div
               key={evt.id}
-              className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6"
+              className="card flex flex-col md:flex-row md:items-center justify-between gap-6 hover:border-line-strong transition-colors"
             >
               <div className="space-y-2 flex-1">
                 <div className="flex items-center gap-3">
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-indigo-50 text-indigo-700">
+                  <span className="text-[10px] font-semibold px-2 py-0.5 rounded bg-accent-soft text-accent border border-accent/20">
                     {evt.type}
                   </span>
-                  <h3 className="text-base font-bold text-slate-900">{evt.title}</h3>
+                  <h3 className="text-[15px] font-semibold text-fg">{evt.title}</h3>
                 </div>
 
-                <p className="text-xs text-indigo-600 font-semibold">Keynote: {evt.speaker}</p>
+                <p className="text-xs text-accent font-medium">Keynote: {evt.speaker}</p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-500 pt-2 border-t border-slate-100">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-fg-muted pt-2 border-t border-line">
                   <div className="flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-slate-400" /> {evt.date}
+                    <Calendar className="w-3.5 h-3.5 text-fg-subtle" /> {evt.date}
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-slate-400" /> {evt.venue}
+                    <MapPin className="w-3.5 h-3.5 text-fg-subtle" /> {evt.venue}
                   </div>
                 </div>
               </div>

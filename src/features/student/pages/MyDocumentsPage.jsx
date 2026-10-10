@@ -96,10 +96,10 @@ export function MyDocumentsPage() {
   return (
     <div className="space-y-6 max-w-6xl mx-auto">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-line">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">My Placement Documents</h2>
-          <p className="text-xs text-slate-500 mt-1">
+          <h1 className="text-[22px] font-semibold text-fg tracking-tight">My Placement Documents</h1>
+          <p className="text-xs text-fg-muted mt-0.5">
             Official academic mark sheets, degree proofs, and professional certifications verified for drive eligibility.
           </p>
         </div>
@@ -109,12 +109,12 @@ export function MyDocumentsPage() {
       </div>
 
       {/* Recruiter Privacy Notice */}
-      <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between flex-wrap gap-3">
+      <div className="card p-4 bg-surface-2/60 flex items-center justify-between flex-wrap gap-3">
         <div className="flex items-center gap-3">
-          <ShieldCheck className="w-5 h-5 text-indigo-600" />
+          <ShieldCheck className="w-5 h-5 text-accent" />
           <div className="text-xs">
-            <span className="font-bold text-slate-900">Recruiter Document Permissions (M3.13, 26.5):</span>
-            <p className="text-slate-500">
+            <span className="font-semibold text-fg">Recruiter Document Permissions (M3.13, 26.5):</span>
+            <p className="text-fg-muted mt-0.5">
               Only documents marked with "Recruiter Access" are visible to verified company HRs during shortlisting.
             </p>
           </div>
@@ -122,66 +122,64 @@ export function MyDocumentsPage() {
       </div>
 
       {/* Documents Table */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-slate-600">
-            <thead className="bg-slate-50 text-[11px] uppercase tracking-wider font-semibold text-slate-500 border-b border-slate-200">
-              <tr>
-                <th className="px-6 py-4">Document Details</th>
-                <th className="px-6 py-4">Category</th>
-                <th className="px-6 py-4">Verification</th>
-                <th className="px-6 py-4">Recruiter Access</th>
-                <th className="px-6 py-4 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 text-xs">
-              {documents.map((doc) => (
-                <tr key={doc.id} className="hover:bg-slate-50/80 transition-colors">
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2.5 bg-indigo-50 text-indigo-600 rounded-xl shrink-0">
-                        <FileText className="w-4 h-4" />
-                      </div>
-                      <div className="min-w-0">
-                        <p className="font-bold text-slate-900 truncate">{doc.title}</p>
-                        <p className="text-[11px] text-slate-400 mt-0.5">{doc.fileName} · {doc.size}</p>
-                      </div>
+      <div className="table-wrap">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Document Details</th>
+              <th>Category</th>
+              <th>Verification</th>
+              <th>Recruiter Access</th>
+              <th className="text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {documents.map((doc) => (
+              <tr key={doc.id}>
+                <td>
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-surface-2 text-accent border border-line rounded-[6px] shrink-0">
+                      <FileText className="w-4 h-4" />
                     </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-md font-medium text-[11px]">
-                      {doc.category}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4">
-                    <StatusBadge status={doc.status} />
-                  </td>
-                  <td className="px-6 py-4">
-                    <button
-                      onClick={() => toggleRecruiterAccess(doc.id)}
-                      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold border transition-all ${
-                        doc.recruiterAccess
-                          ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
-                          : 'bg-slate-100 text-slate-500 border-slate-200'
-                      }`}
-                    >
-                      {doc.recruiterAccess ? 'Visible to Recruiters' : 'Confidential / TPO Only'}
-                    </button>
-                  </td>
-                  <td className="px-6 py-4 text-right">
-                    <button
-                      onClick={() => alert(`Downloading ${doc.fileName}`)}
-                      className="p-1.5 text-slate-400 hover:text-slate-700 rounded hover:bg-slate-100 inline-block mr-1"
-                      title="Download Document"
-                    >
-                      <Download className="w-4 h-4" />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+                    <div className="min-w-0">
+                      <p className="font-semibold text-fg truncate">{doc.title}</p>
+                      <p className="text-[11px] text-fg-muted mt-0.5">{doc.fileName} · {doc.size}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <span className="px-2 py-0.5 bg-surface-2 text-fg-muted rounded-[4px] border border-line font-medium text-[11px]">
+                    {doc.category}
+                  </span>
+                </td>
+                <td>
+                  <StatusBadge status={doc.status} />
+                </td>
+                <td>
+                  <button
+                    onClick={() => toggleRecruiterAccess(doc.id)}
+                    className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-medium border cursor-pointer ${
+                      doc.recruiterAccess
+                        ? 'bg-success-soft text-success border-success/20'
+                        : 'bg-surface-2 text-fg-muted border-line'
+                    }`}
+                  >
+                    {doc.recruiterAccess ? 'Visible to Recruiters' : 'Confidential / TPO Only'}
+                  </button>
+                </td>
+                <td className="text-right">
+                  <button
+                    onClick={() => alert(`Downloading ${doc.fileName}`)}
+                    className="p-1.5 text-fg-muted hover:text-fg rounded hover:bg-surface-2 inline-block cursor-pointer"
+                    title="Download Document"
+                  >
+                    <Download className="w-4 h-4" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       {/* Upload Modal */}
@@ -203,22 +201,22 @@ export function MyDocumentsPage() {
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Document Title</label>
+            <label className="block text-xs font-semibold text-fg mb-1">Document Title</label>
             <input
               type="text"
               placeholder="e.g. 5th Semester Mark Sheet"
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
-              className="w-full text-xs p-2.5 bg-white border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full text-xs p-2.5 bg-surface border border-line-strong rounded-[6px] outline-none focus:border-accent text-fg"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Classification Category</label>
+            <label className="block text-xs font-semibold text-fg mb-1">Classification Category</label>
             <select
               value={newCategory}
               onChange={(e) => setNewCategory(e.target.value)}
-              className="w-full text-xs p-2.5 bg-white border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full text-xs p-2.5 bg-surface border border-line-strong rounded-[6px] outline-none focus:border-accent text-fg"
             >
               <option value="Academic Proof">Academic Proof</option>
               <option value="Official Transcripts">Official Transcripts</option>

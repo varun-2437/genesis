@@ -39,10 +39,10 @@ export function GrievanceFeedbackPage() {
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-line">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">Student Grievance & Feedback Desk</h2>
-          <p className="text-xs text-slate-500 mt-1">
+          <h1 className="text-[22px] font-semibold text-fg tracking-tight">Student Grievance & Feedback Desk</h1>
+          <p className="text-xs text-fg-muted mt-0.5">
             Confidential reporting for drive disputes, scheduling clashes, evaluation fairness, or policy appeals (M20.1).
           </p>
         </div>
@@ -53,25 +53,25 @@ export function GrievanceFeedbackPage() {
 
       <div className="space-y-4">
         {grievances.map((g) => (
-          <div key={g.id} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+          <div key={g.id} className="card space-y-3 hover:border-line-strong transition-colors">
             <div className="flex items-start justify-between">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs font-bold text-indigo-600">{g.id}</span>
+                  <span className="font-mono text-xs font-semibold text-accent">{g.id}</span>
                   <StatusBadge status={g.status} />
                   {g.confidential && (
-                    <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-semibold flex items-center gap-1">
-                      <Shield className="w-3 h-3 text-emerald-600" /> Confidential
+                    <span className="text-[10px] bg-surface-2 text-fg-muted border border-line px-2 py-0.5 rounded font-medium flex items-center gap-1">
+                      <Shield className="w-3 h-3 text-success" /> Confidential
                     </span>
                   )}
                 </div>
-                <h3 className="text-sm font-bold text-slate-900 mt-2">{g.subject}</h3>
-                <p className="text-xs text-slate-400">Category: {g.category} · Submitted {g.submittedOn}</p>
+                <h3 className="text-sm font-semibold text-fg mt-2">{g.subject}</h3>
+                <p className="text-xs text-fg-muted">Category: {g.category} · Submitted {g.submittedOn}</p>
               </div>
             </div>
 
-            <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 text-xs text-slate-700">
-              <strong>TPO Cell Response / Action Taken:</strong> {g.tpoResponse}
+            <div className="p-3 bg-surface-2/60 rounded-[6px] border border-line text-xs text-fg">
+              <strong className="text-fg font-semibold">TPO Cell Response / Action Taken:</strong> {g.tpoResponse}
             </div>
           </div>
         ))}
@@ -92,26 +92,26 @@ export function GrievanceFeedbackPage() {
           </>
         }
       >
-        <div className="space-y-4 text-xs text-slate-600">
+        <div className="space-y-4 text-xs text-fg-muted">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Issue Subject</label>
+            <label className="block text-xs font-semibold text-fg mb-1">Issue Subject</label>
             <input
               type="text"
               placeholder="e.g. Schedule clash with mandatory university lab exam"
               value={newSubject}
               onChange={(e) => setNewSubject(e.target.value)}
-              className="w-full text-xs p-2.5 bg-white border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full text-xs p-2.5 bg-surface border border-line-strong rounded-[6px] outline-none focus:border-accent text-fg"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Detailed Explanation</label>
+            <label className="block text-xs font-semibold text-fg mb-1">Detailed Explanation</label>
             <textarea
               rows={4}
               placeholder="Describe the drive name, dates, and grievance details..."
               value={newDesc}
               onChange={(e) => setNewDesc(e.target.value)}
-              className="w-full text-xs p-2.5 bg-white border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full text-xs p-2.5 bg-surface border border-line-strong rounded-[6px] outline-none focus:border-accent text-fg"
             />
           </div>
 
@@ -121,9 +121,9 @@ export function GrievanceFeedbackPage() {
               id="conf"
               checked={isConfidential}
               onChange={(e) => setIsConfidential(e.target.checked)}
-              className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 h-4 w-4"
+              className="rounded border-line-strong text-accent focus:ring-accent h-4 w-4"
             />
-            <label htmlFor="conf" className="cursor-pointer text-xs text-slate-700">
+            <label htmlFor="conf" className="cursor-pointer text-xs text-fg">
               Keep identity strictly confidential from company recruiters (M20.4)
             </label>
           </div>

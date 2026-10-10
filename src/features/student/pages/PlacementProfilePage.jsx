@@ -81,14 +81,14 @@ export function PlacementProfilePage() {
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
       {/* Header with Verification & ERP Sync */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="card p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h2 className="text-2xl font-bold text-slate-900">Placement Registration Profile</h2>
+            <h1 className="text-[22px] font-semibold text-fg tracking-tight">Placement Registration Profile</h1>
             <StatusBadge status="VERIFIED" />
           </div>
-          <p className="text-xs text-slate-500 mt-1">
-            Registered for Campus Drive Cycle 2026-27 · Roll No: <strong>{profile.regNo}</strong>
+          <p className="text-xs text-fg-muted mt-0.5">
+            Registered for Campus Drive Cycle 2026-27 · Roll No: <strong className="text-fg">{profile.regNo}</strong>
           </p>
         </div>
 
@@ -97,7 +97,7 @@ export function PlacementProfilePage() {
             variant="secondary"
             size="sm"
             onClick={syncFromERP}
-            className="flex items-center gap-1.5 text-xs text-indigo-700 bg-indigo-50 border-indigo-200 hover:bg-indigo-100"
+            className="flex items-center gap-1.5 text-xs text-accent"
           >
             <DownloadCloud className="w-4 h-4" /> Sync from ERP
           </Button>
@@ -113,8 +113,8 @@ export function PlacementProfilePage() {
       </div>
 
       {saveSuccess && (
-        <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-xl flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Profile updated and logged for TPO compliance audit.
+        <div className="p-3 bg-success-soft border border-success/20 text-success text-xs rounded-[6px] flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 text-success" /> Profile updated and logged for TPO compliance audit.
         </div>
       )}
 
@@ -132,16 +132,16 @@ export function PlacementProfilePage() {
         onChange={setActiveTab}
       />
 
-      <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+      <div className="card p-6 md:p-8">
         {/* Tab 1: Academic & Eligibility */}
         {activeTab === 'academic' && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Academic Records & CGPA</h3>
-                <p className="text-xs text-slate-500">Official academic performance authenticated against university records</p>
+                <h3 className="text-sm font-semibold text-fg uppercase tracking-wider">Academic Records & CGPA</h3>
+                <p className="text-xs text-fg-muted">Official academic performance authenticated against university records</p>
               </div>
-              <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+              <span className="text-xs font-semibold text-success bg-success-soft px-3 py-1 rounded-[4px] border border-success/20">
                 ERP Verified
               </span>
             </div>
@@ -163,7 +163,7 @@ export function PlacementProfilePage() {
         {/* Tab 2: Personal */}
         {activeTab === 'personal' && (
           <div className="space-y-6">
-            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Contact & Demographic Details</h3>
+            <h3 className="text-sm font-semibold text-fg uppercase tracking-wider">Contact & Demographic Details</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input label="Full Legal Name" value={profile.fullName} onChange={(e) => setProfile({...profile, fullName: e.target.value})} />
               <Input label="University Email" value={profile.email} disabled />
@@ -177,7 +177,7 @@ export function PlacementProfilePage() {
         {/* Tab 3: Skills & Experience */}
         {activeTab === 'skills' && (
           <div className="space-y-6">
-            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Competencies & Certifications</h3>
+            <h3 className="text-sm font-semibold text-fg uppercase tracking-wider">Competencies & Certifications</h3>
             <div className="space-y-4">
               <Input
                 label="Technical Skills (Comma separated)"
@@ -212,21 +212,21 @@ export function PlacementProfilePage() {
         {/* Tab 4: Projects & Links */}
         {activeTab === 'projects' && (
           <div className="space-y-6">
-            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Portfolio & Repository URLs</h3>
+            <h3 className="text-sm font-semibold text-fg uppercase tracking-wider">Portfolio & Repository URLs</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Input label="GitHub URL" value={profile.github} onChange={(e) => setProfile({...profile, github: e.target.value})} />
               <Input label="LinkedIn Profile" value={profile.linkedin} onChange={(e) => setProfile({...profile, linkedin: e.target.value})} />
               <Input label="Personal Portfolio URL" value={profile.portfolio} onChange={(e) => setProfile({...profile, portfolio: e.target.value})} />
             </div>
 
-            <div className="pt-4 border-t border-slate-100">
-              <h4 className="text-xs font-bold text-slate-800 uppercase mb-3">Key Academic Projects</h4>
+            <div className="pt-4 border-t border-line">
+              <h4 className="text-xs font-semibold text-fg uppercase mb-3">Key Academic Projects</h4>
               <div className="space-y-3">
                 {profile.projects.map((proj, idx) => (
-                  <div key={idx} className="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                    <p className="text-xs font-bold text-slate-900">{proj.title}</p>
-                    <p className="text-[11px] text-indigo-600 font-medium">{proj.tech}</p>
-                    <p className="text-xs text-slate-600 mt-1">{proj.desc}</p>
+                  <div key={idx} className="p-4 bg-surface-2/60 rounded-[6px] border border-line">
+                    <p className="text-xs font-semibold text-fg">{proj.title}</p>
+                    <p className="text-[11px] text-accent font-medium">{proj.tech}</p>
+                    <p className="text-xs text-fg-muted mt-1">{proj.desc}</p>
                   </div>
                 ))}
               </div>
@@ -237,7 +237,7 @@ export function PlacementProfilePage() {
         {/* Tab 5: Preferences */}
         {activeTab === 'preferences' && (
           <div className="space-y-6">
-            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Career Preferences & Consent</h3>
+            <h3 className="text-sm font-semibold text-fg uppercase tracking-wider">Career Preferences & Consent</h3>
             <div className="space-y-4">
               <Input
                 label="Preferred Job Roles / Domains"
@@ -250,15 +250,15 @@ export function PlacementProfilePage() {
                 onChange={(e) => setProfile({...profile, preferredLocations: e.target.value})}
               />
 
-              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 flex items-start gap-3 mt-4">
+              <div className="p-4 bg-surface-2/60 rounded-[6px] border border-line flex items-start gap-3 mt-4">
                 <input
                   type="checkbox"
                   id="consent"
                   checked={profile.placementConsent}
                   onChange={(e) => setProfile({...profile, placementConsent: e.target.checked})}
-                  className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 h-4 w-4 mt-0.5"
+                  className="rounded border-line-strong text-accent focus:ring-accent h-4 w-4 mt-0.5"
                 />
-                <label htmlFor="consent" className="text-xs text-slate-700 leading-relaxed cursor-pointer">
+                <label htmlFor="consent" className="text-xs text-fg leading-relaxed cursor-pointer">
                   <strong>Formal Placement Cell Undertaking:</strong> I hereby declare that the academic scores, backlogs, and resumes submitted are genuine. I agree to abide by the institution's Campus Placement Policy and Offer Acceptance Regulations.
                 </label>
               </div>
@@ -269,28 +269,28 @@ export function PlacementProfilePage() {
         {/* Tab 6: Placement & Change History (2.16, 2.17) */}
         {activeTab === 'history' && (
           <div className="space-y-6">
-            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Audit Log & Modifications</h3>
+            <h3 className="text-sm font-semibold text-fg uppercase tracking-wider">Audit Log & Modifications</h3>
             <div className="space-y-3">
-              <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-start justify-between">
+              <div className="p-4 bg-surface-2/60 border border-line rounded-[6px] flex items-start justify-between">
                 <div>
-                  <p className="text-xs font-bold text-slate-900">ERP Academic Scores Auto-Reconciled</p>
-                  <p className="text-[11px] text-slate-500 mt-0.5">Automated COE Sync · CGPA updated to 8.82</p>
+                  <p className="text-xs font-semibold text-fg">ERP Academic Scores Auto-Reconciled</p>
+                  <p className="text-[11px] text-fg-muted mt-0.5">Automated COE Sync · CGPA updated to 8.82</p>
                 </div>
-                <span className="text-[10px] text-slate-400 font-medium">Oct 08, 2026 14:20</span>
+                <span className="text-[10px] text-fg-muted font-medium">Oct 08, 2026 14:20</span>
               </div>
-              <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-start justify-between">
+              <div className="p-4 bg-surface-2/60 border border-line rounded-[6px] flex items-start justify-between">
                 <div>
-                  <p className="text-xs font-bold text-slate-900">Technical Resume (v2_Cloud) Approved</p>
-                  <p className="text-[11px] text-slate-500 mt-0.5">Approved by TPO Staff Prof. Sharma</p>
+                  <p className="text-xs font-semibold text-fg">Technical Resume (v2_Cloud) Approved</p>
+                  <p className="text-[11px] text-fg-muted mt-0.5">Approved by TPO Staff Prof. Sharma</p>
                 </div>
-                <span className="text-[10px] text-slate-400 font-medium">Oct 05, 2026 11:15</span>
+                <span className="text-[10px] text-fg-muted font-medium">Oct 05, 2026 11:15</span>
               </div>
-              <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-start justify-between">
+              <div className="p-4 bg-surface-2/60 border border-line rounded-[6px] flex items-start justify-between">
                 <div>
-                  <p className="text-xs font-bold text-slate-900">Placement Undertaking Signed</p>
-                  <p className="text-[11px] text-slate-500 mt-0.5">Digitally executed by student (IP: 103.21.24.12)</p>
+                  <p className="text-xs font-semibold text-fg">Placement Undertaking Signed</p>
+                  <p className="text-[11px] text-fg-muted mt-0.5">Digitally executed by student (IP: 103.21.24.12)</p>
                 </div>
-                <span className="text-[10px] text-slate-400 font-medium">Sep 20, 2026 09:30</span>
+                <span className="text-[10px] text-fg-muted font-medium">Sep 20, 2026 09:30</span>
               </div>
             </div>
           </div>
