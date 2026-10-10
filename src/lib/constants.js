@@ -40,3 +40,58 @@ export const VERIFICATION_STATUS = {
   REJECTED: 'REJECTED',
   REQUIRES_UPDATE: 'REQUIRES_UPDATE',
 }
+
+export const COMPANY_STATUS = {
+  PROSPECT: 'PROSPECT',
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  RESTRICTED: 'RESTRICTED',
+}
+
+export const COMPANY_TIER = {
+  TIER_1: 'Tier 1 (Dream)',
+  TIER_2: 'Tier 2 (Super Dream)',
+  TIER_3: 'Tier 3 (Core)',
+  MASS: 'Mass Recruiter',
+}
+
+export const JOB_STATUS = {
+  DRAFT: 'DRAFT',
+  PENDING_APPROVAL: 'PENDING_APPROVAL',
+  PUBLISHED: 'PUBLISHED',
+  PAUSED: 'PAUSED',
+  CLOSED: 'CLOSED',
+}
+
+export const DRIVE_TYPE = {
+  ON_CAMPUS: 'ON_CAMPUS',
+  VIRTUAL: 'VIRTUAL',
+  POOLED: 'POOLED',
+  OFF_CAMPUS: 'OFF_CAMPUS',
+  HYBRID: 'HYBRID',
+}
+
+export const ROUND_TYPE = {
+  RESUME_SCREENING: 'RESUME_SCREENING',
+  ONLINE_ASSESSMENT: 'ONLINE_ASSESSMENT',
+  CODING_TEST: 'CODING_TEST',
+  GROUP_DISCUSSION: 'GROUP_DISCUSSION',
+  TECHNICAL_INTERVIEW_1: 'TECHNICAL_INTERVIEW_1',
+  TECHNICAL_INTERVIEW_2: 'TECHNICAL_INTERVIEW_2',
+  MANAGERIAL_INTERVIEW: 'MANAGERIAL_INTERVIEW',
+  HR_INTERVIEW: 'HR_INTERVIEW',
+  FINAL_SELECTION: 'FINAL_SELECTION',
+}
+
+export const DEPARTMENTS = [
+  'Computer Science and Engineering',
+  'Information Technology',
+  'Electronics and Communication',
+  'Electrical and Electronics',
+  'Mechanical Engineering',
+  'Civil Engineering',
+  'Chemical Engineering',
+  'Biotechnology',
+  'Data Science & AI',
+]
+
