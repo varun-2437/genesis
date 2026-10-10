@@ -3,6 +3,34 @@ import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { PortalLayout } from '@/layouts/PortalLayout'
 import { StudentDashboard } from '@/features/student/pages/StudentDashboard'
 import { TpoDashboard } from '@/features/tpo/core/pages/TpoDashboard'
+import { OffersManagement } from '@/features/tpo/extended/pages/OffersManagement'
+import { ReportsAnalytics } from '@/features/tpo/extended/pages/ReportsAnalytics'
+import { PolicyRuleEngine } from '@/features/tpo/extended/pages/PolicyRuleEngine'
+import { QuestionBank } from '@/features/tpo/extended/pages/QuestionBank'
+import { TestBuilderScheduling } from '@/features/tpo/extended/pages/TestBuilderScheduling'
+import { ResultsEvaluationIntegrity } from '@/features/tpo/extended/pages/ResultsEvaluationIntegrity'
+import { TrainingProgrammesCalendar } from '@/features/tpo/extended/pages/TrainingProgrammesCalendar'
+import { CommunicationCentre } from '@/features/tpo/extended/pages/CommunicationCentre'
+import { InternshipManagement } from '@/features/tpo/extended/pages/InternshipManagement'
+import { EventsLogistics } from '@/features/tpo/extended/pages/EventsLogistics'
+import { CareerGuidanceAdmin } from '@/features/tpo/extended/pages/CareerGuidanceAdmin'
+import { GrievanceManagement } from '@/features/tpo/extended/pages/GrievanceManagement'
+import { DocumentsAgreements } from '@/features/tpo/extended/pages/DocumentsAgreements'
+import { AiInsightsReview } from '@/features/tpo/extended/pages/AiInsightsReview'
+import { CustomReportBuilder } from '@/features/tpo/extended/pages/CustomReportBuilder'
+import { ManagementDashboard } from '@/features/management/pages/ManagementDashboard'
+import { DepartmentComparison } from '@/features/management/pages/DepartmentComparison'
+import { RecruitmentSalaryStats } from '@/features/management/pages/RecruitmentSalaryStats'
+import { BudgetExpenditure } from '@/features/management/pages/BudgetExpenditure'
+import { CompanyEngagementTrends } from '@/features/management/pages/CompanyEngagementTrends'
+import { AccreditationReports } from '@/features/management/pages/AccreditationReports'
+import { PolicyApprovals } from '@/features/management/pages/PolicyApprovals'
+import { AdminSystemHealth } from '@/features/admin/pages/AdminSystemHealth'
+import { UsersManagement } from '@/features/admin/pages/UsersManagement'
+import { RolesPermissions } from '@/features/admin/pages/RolesPermissions'
+import { MasterData } from '@/features/admin/pages/MasterData'
+import { IntegrationsHub } from '@/features/admin/pages/IntegrationsHub'
+import { SecurityAuditTrail } from '@/features/admin/pages/SecurityAuditTrail'
 
 // Reusable placeholder component for pages being implemented across Dev 1, 2, 3
 function PagePlaceholder({ title, portal, devOwner }) {
@@ -43,7 +71,21 @@ export const router = createBrowserRouter([
       { path: 'tpo/companies', element: <PagePlaceholder title="T5: Companies Onboarding & List" portal="tpo" devOwner="Dev 2" /> },
       { path: 'tpo/drives', element: <PagePlaceholder title="T9: Drives List & Scheduling" portal="tpo" devOwner="Dev 2" /> },
       { path: 'tpo/applications', element: <PagePlaceholder title="T12: Applications Management & Bulk Shortlist" portal="tpo" devOwner="Dev 2" /> },
-      { path: 'tpo/reports', element: <PagePlaceholder title="T30: Reports, NAAC/NIRF & Analytics" portal="tpo" devOwner="Dev 3" /> },
+      { path: 'tpo/offers', element: <OffersManagement /> },
+      { path: 'tpo/internships', element: <InternshipManagement /> },
+      { path: 'tpo/policies', element: <PolicyRuleEngine /> },
+      { path: 'tpo/questions', element: <QuestionBank /> },
+      { path: 'tpo/tests', element: <TestBuilderScheduling /> },
+      { path: 'tpo/test-results', element: <ResultsEvaluationIntegrity /> },
+      { path: 'tpo/training', element: <TrainingProgrammesCalendar /> },
+      { path: 'tpo/events', element: <EventsLogistics /> },
+      { path: 'tpo/guidance', element: <CareerGuidanceAdmin /> },
+      { path: 'tpo/grievances', element: <GrievanceManagement /> },
+      { path: 'tpo/documents', element: <DocumentsAgreements /> },
+      { path: 'tpo/ai-insights', element: <AiInsightsReview /> },
+      { path: 'tpo/comms', element: <CommunicationCentre /> },
+      { path: 'tpo/reports', element: <ReportsAnalytics /> },
+      { path: 'tpo/report-builder', element: <CustomReportBuilder /> },
 
       // Recruiter Portal (Dev 2)
       { path: 'recruiter/dashboard', element: <PagePlaceholder title="R1: Recruiter Dashboard" portal="recruiter" devOwner="Dev 2" /> },
@@ -57,9 +99,13 @@ export const router = createBrowserRouter([
       { path: 'faculty/internships', element: <PagePlaceholder title="F7: Internship Monitoring & Approval" portal="faculty" devOwner="Dev 2" /> },
 
       // Management Portal (Dev 3)
-      { path: 'management/dashboard', element: <PagePlaceholder title="M1: Institution-wide Placement Metrics" portal="management" devOwner="Dev 3" /> },
-      { path: 'management/departments', element: <PagePlaceholder title="M2: Department & Program Comparison" portal="management" devOwner="Dev 3" /> },
-      { path: 'management/accreditation', element: <PagePlaceholder title="M6: Accreditation Reports (NIRF / NBA)" portal="management" devOwner="Dev 3" /> },
+      { path: 'management/dashboard', element: <ManagementDashboard /> },
+      { path: 'management/departments', element: <DepartmentComparison /> },
+      { path: 'management/salary-stats', element: <RecruitmentSalaryStats /> },
+      { path: 'management/budget', element: <BudgetExpenditure /> },
+      { path: 'management/company-trends', element: <CompanyEngagementTrends /> },
+      { path: 'management/accreditation', element: <AccreditationReports /> },
+      { path: 'management/policy-approvals', element: <PolicyApprovals /> },
 
       // Alumni Portal (Dev 1)
       { path: 'alumni/dashboard', element: <PagePlaceholder title="A1: Alumni Dashboard & Network" portal="alumni" devOwner="Dev 1" /> },
@@ -67,10 +113,12 @@ export const router = createBrowserRouter([
       { path: 'alumni/referrals', element: <PagePlaceholder title="A4: Job Referrals & Openings" portal="alumni" devOwner="Dev 1" /> },
 
       // Admin Portal (Dev 3)
-      { path: 'admin/dashboard', element: <PagePlaceholder title="AD1: System Health & Monitoring" portal="admin" devOwner="Dev 3" /> },
-      { path: 'admin/users', element: <PagePlaceholder title="AD2: User Accounts & Roles" portal="admin" devOwner="Dev 3" /> },
-      { path: 'admin/master-data', element: <PagePlaceholder title="AD4: Master Data Configurations" portal="admin" devOwner="Dev 3" /> },
-      { path: 'admin/audit', element: <PagePlaceholder title="AD7: Security, Privacy & Audit Trail" portal="admin" devOwner="Dev 3" /> },
+      { path: 'admin/dashboard', element: <AdminSystemHealth /> },
+      { path: 'admin/users', element: <UsersManagement /> },
+      { path: 'admin/roles', element: <RolesPermissions /> },
+      { path: 'admin/master-data', element: <MasterData /> },
+      { path: 'admin/integrations', element: <IntegrationsHub /> },
+      { path: 'admin/audit', element: <SecurityAuditTrail /> },
     ],
   },
 ])
