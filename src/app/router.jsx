@@ -12,8 +12,16 @@ import { NotificationCentrePage } from '@/features/shared/pages/NotificationCent
 import { MyAccountPrivacyPage } from '@/features/shared/pages/MyAccountPrivacyPage'
 import { NotFoundPage, UnauthorizedPage, ServerErrorPage } from '@/features/shared/pages/ErrorPages'
 
-// Feature Dashboards
+// Core Student Pages (S1, S2, S3, S5, S6, S7, S13)
 import { StudentDashboard } from '@/features/student/pages/StudentDashboard'
+import { PlacementProfilePage } from '@/features/student/pages/PlacementProfilePage'
+import { MyResumesPage } from '@/features/student/pages/MyResumesPage'
+import { JobBrowsePage } from '@/features/student/pages/JobBrowsePage'
+import { JobDetailPage } from '@/features/student/pages/JobDetailPage'
+import { MyApplicationsPage } from '@/features/student/pages/MyApplicationsPage'
+import { MyOffersJoiningPage } from '@/features/student/pages/MyOffersJoiningPage'
+
+// TPO Dashboards
 import { TpoDashboard } from '@/features/tpo/core/pages/TpoDashboard'
 
 // Reusable placeholder component for other pages
@@ -60,13 +68,14 @@ export const router = createBrowserRouter([
       { path: 'notifications', element: <NotificationCentrePage /> },
       { path: 'account', element: <MyAccountPrivacyPage /> },
 
-      // Student Portal (Dev 1, S1 - S19)
+      // Student Portal (Dev 1 P1 Demo Path)
       { path: 'student/dashboard', element: <StudentDashboard /> },
-      { path: 'student/profile', element: <PagePlaceholder title="S2: Placement Registration & Profile" portal="student" devOwner="Dev 1" /> },
-      { path: 'student/resumes', element: <PagePlaceholder title="S3: My Resumes (Builder & Versions)" portal="student" devOwner="Dev 1" /> },
-      { path: 'student/jobs', element: <PagePlaceholder title="S5: Jobs & Internships (Browse)" portal="student" devOwner="Dev 1" /> },
-      { path: 'student/applications', element: <PagePlaceholder title="S7: My Applications Tracker" portal="student" devOwner="Dev 1" /> },
-      { path: 'student/offers', element: <PagePlaceholder title="S13: My Offers & Joining" portal="student" devOwner="Dev 1" /> },
+      { path: 'student/profile', element: <PlacementProfilePage /> },
+      { path: 'student/resumes', element: <MyResumesPage /> },
+      { path: 'student/jobs', element: <JobBrowsePage /> },
+      { path: 'student/jobs/:jobId', element: <JobDetailPage /> },
+      { path: 'student/applications', element: <MyApplicationsPage /> },
+      { path: 'student/offers', element: <MyOffersJoiningPage /> },
 
       // TPO Portal (Dev 2 Core + Dev 3 Extended)
       { path: 'tpo/dashboard', element: <TpoDashboard /> },
