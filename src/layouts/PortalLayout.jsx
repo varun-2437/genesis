@@ -55,8 +55,22 @@ const PORTAL_NAV = {
     { label: 'Applications', path: '/tpo/applications' },
     { label: 'Rounds Pipeline', path: '/tpo/rounds' },
     { label: 'Interview Scheduler', path: '/tpo/interviews' },
+    { label: 'Question Bank', path: '/tpo/questions' },
+    { label: 'Test Builder', path: '/tpo/tests' },
+    { label: 'Test Results', path: '/tpo/test-results' },
+    { label: 'Training Calendar', path: '/tpo/training' },
+    { label: 'Internships & PPO', path: '/tpo/internships' },
+    { label: 'Offers & Joining', path: '/tpo/offers' },
+    { label: 'Comms Centre', path: '/tpo/comms' },
+    { label: 'Campus Events', path: '/tpo/events' },
+    { label: 'Career Counselling', path: '/tpo/guidance' },
+    { label: 'Grievance Redressal', path: '/tpo/grievances' },
     { label: 'Alumni Directory', path: '/tpo/alumni' },
+    { label: 'Corporate MoUs & Docs', path: '/tpo/documents' },
+    { label: 'AI Review Queue', path: '/tpo/ai-insights' },
     { label: 'Reports & Analytics', path: '/tpo/reports' },
+    { label: 'Report Builder', path: '/tpo/report-builder' },
+    { label: 'Policy Engine', path: '/tpo/policies' },
   ],
   [ROLES.RECRUITER]: [
     { label: 'Dashboard', path: '/recruiter/dashboard' },
@@ -78,9 +92,13 @@ const PORTAL_NAV = {
     { label: 'Internship Approvals (NOC)', path: '/faculty/internships' },
   ],
   [ROLES.MANAGEMENT]: [
-    { label: 'Overview', path: '/management/dashboard' },
-    { label: 'Department Comparison', path: '/management/departments' },
-    { label: 'Accreditation (NIRF/NAAC)', path: '/management/accreditation' },
+    { label: 'Overview (M1)', path: '/management/dashboard' },
+    { label: 'Dept Comparison (M2)', path: '/management/departments' },
+    { label: 'Salary Stats (M3)', path: '/management/salary-stats' },
+    { label: 'Budget & Expenditure (M4)', path: '/management/budget' },
+    { label: 'Company Trends (M5)', path: '/management/company-trends' },
+    { label: 'Accreditation Dossier (M6)', path: '/management/accreditation' },
+    { label: 'Policy Approvals (M7)', path: '/management/policy-approvals' },
   ],
   [ROLES.ALUMNI]: [
     { label: 'Dashboard', path: '/alumni/dashboard' },
@@ -88,10 +106,12 @@ const PORTAL_NAV = {
     { label: 'Referrals', path: '/alumni/referrals' },
   ],
   [ROLES.ADMIN]: [
-    { label: 'System Overview', path: '/admin/dashboard' },
-    { label: 'Users & Roles', path: '/admin/users' },
-    { label: 'Master Data', path: '/admin/master-data' },
-    { label: 'Audit Logs', path: '/admin/audit' },
+    { label: 'System Health (AD1/8)', path: '/admin/dashboard' },
+    { label: 'Users & Roles (AD2)', path: '/admin/users' },
+    { label: 'Permissions Matrix (AD3)', path: '/admin/roles' },
+    { label: 'Master Data (AD4)', path: '/admin/master-data' },
+    { label: 'Integrations Hub (AD5/6)', path: '/admin/integrations' },
+    { label: 'Audit Logs (AD7)', path: '/admin/audit' },
   ],
 }
 
@@ -103,7 +123,7 @@ export function PortalLayout() {
   return (
     <div className="min-h-screen flex bg-slate-50">
       {/* Sidebar */}
-      <aside className="w-64 bg-slate-900 text-slate-100 flex flex-col shrink-0 border-r border-slate-800">
+      <aside className="w-64 bg-slate-900 text-slate-100 flex flex-col shrink-0 border-r border-slate-800 sticky top-0 h-screen">
         <div className="p-6 border-b border-slate-800 flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
@@ -133,8 +153,8 @@ export function PortalLayout() {
           </select>
         </div>
 
-        {/* Navigation Items */}
-        <nav className="p-4 flex-1 space-y-1 overflow-y-auto">
+        {/* Navigation Items with custom smooth scrollbar */}
+        <nav className="p-4 flex-1 space-y-1 overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
           {navItems.map((item) => (
             <NavLink
               key={item.path}
@@ -142,7 +162,7 @@ export function PortalLayout() {
               className={({ isActive }) =>
                 `flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
                   isActive
-                    ? 'bg-indigo-600 text-white shadow-sm'
+                    ? 'bg-indigo-600 text-white shadow-sm font-semibold'
                     : 'text-slate-300 hover:bg-slate-800 hover:text-white'
                 }`
               }
